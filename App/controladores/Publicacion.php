@@ -4,7 +4,7 @@ class Publicacion extends Controlador{
 
         // Sesion::iniciarSesion($this->datos);
            
-        // $this->becaModelo = $this->modelo('BecaModelo');
+        $this->publicacionModelo = $this->modelo('PublicacionModelo');
 
         // $this->datos["rolesPermitidos"] = [10];
 
@@ -16,11 +16,11 @@ class Publicacion extends Controlador{
     }
 
 
-    // public function index(){
-    //     //$this->datos["becas"]=$this->becaModelo->getTipoBeca();
+    public function index(){
+        $this->datos["publicaciones"]=$this->publicacionModelo->getPublicaciones();
       
-    //     $this->vista("publicaciones/index",$this->datos);
+        $this->vista("publicaciones/index",$this->datos);
      
         
-    // }
+    }
 }

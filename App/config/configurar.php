@@ -16,9 +16,9 @@ define('NOMBRE_SITIO', 'Sarabastall1');
 
 //configuracio de la base de datos
 
-define('DB_HOST', '192.168.4.238');
+define('DB_HOST', '127.0.0.1');
 define('DB_USUARIO', 'root');
-
+define('DB_PASSWORD', '');
 define('DB_NOMBRE','proyecto');
 define('EmailEmisor','infoargo@cpifpbajoaragon.com');
 define('EmailPass','infoargo_23');
