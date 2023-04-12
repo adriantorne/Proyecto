@@ -10,7 +10,7 @@ error_reporting(E_ALL);
 define('RUTA_APP', dirname(dirname(__FILE__)));
 
 //Ruta url, Ejemplo: http://localhost/atletismo
-define('RUTA_URL', 'http://localhost/miproyecto.com');
+define('RUTA_URL', 'http://localhost/Proyecto');
 
 define('NOMBRE_SITIO', 'Sarabastall1');
 
