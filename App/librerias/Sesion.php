@@ -20,7 +20,7 @@ class Sesion{
         }else{
            session_destroy();
            
-           redireccionar('/inicio_no/');
+           redireccionar('/inicio_no_logeado');
         }
     }
 

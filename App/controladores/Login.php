@@ -18,7 +18,7 @@ class Login extends Controlador{
             if (isset($usuarioSesion)&& !empty($usuarioSesion)) {
                 Sesion::crearSesion($usuarioSesion);
                 
-                redireccionar('/inicio');
+                redireccionar('/index');
 
             }else{
                 
