@@ -1,4 +1,4 @@
-<?php require_once RUTA_APP.'/vistas/inc/header.php'?>
+<?php require_once RUTA_APP.'/vistas/inc/header_no_logeado.php'?>
 <div class="container">
     
   <div class="row d-flex justify-content-center text-center mx-0 mt-3">

@@ -14,11 +14,11 @@ class Login extends Controlador{
             
             $usuarioSesion = $this->loginModelo->loginUsuario($this->datos);
             
-            
+           
             if (isset($usuarioSesion)&& !empty($usuarioSesion)) {
                 Sesion::crearSesion($usuarioSesion);
                 
-                redireccionar('/index');
+                redireccionar('/inicio');
 
             }else{
                 

@@ -9,7 +9,7 @@
       <li id="lipan" class="breadcrumb-item active" aria-current="page">Publicaciones</li>
     </ol>
   </nav>
-        <h2 style="color:#e8753f;" class="text-center"><strong>Historico publicaciones <i style="color:#e8753f;" class="bi bi-book"></i></strong> </h2>
+        <h2  class="text-center"><strong>Historico publicaciones <i class="bi bi-book"></i></strong> </h2>
         
         <div class="row col-12">
   <div class="mb-3 d-grid gap-2 d-md-flex justify-content-md-end col-8">
@@ -156,7 +156,7 @@
                             validada="DENEGADA"
                         }
                       
-                        listing_table.innerHTML += '<td>'+ datosTabla[i].tituloPublic +'</td><td>'+ datosTabla[i].mensajePublic +'</td><td>'+ datosTabla[i].fechaInicio +'</td><td>'+ datosTabla[i].fechaLimite +'</td><td>'+ datosTabla[i].nombreUser +'</td><td class="valor">'+ validada +'</td><td><a class="btn btn-outline-success btn-sm" href="<?php echo RUTA_URL?>/usuario/ver_usuario/' + datosTabla[i].idPersona 
+                        listing_table.innerHTML += '<td>'+ datosTabla[i].tituloPublic +'</td><td>'+ datosTabla[i].mensajePublic +'</td><td>'+ datosTabla[i].fechaInicio +'</td><td>'+ datosTabla[i].fechaLimite +'</td><td>'+ datosTabla[i].nombreUser +'</td><td class="valor">'+ validada +'</td><td><a class="btn btn-outline-success btn-sm" href="<?php echo RUTA_URL?>/publicacion/ver_publicacion/' + datosTabla[i].idPublic 
                         + '"><i class="bi bi-eye"></i></a> <a class="btn btn-outline-danger btn-sm" onclick="confirmar(event)" href="<?php echo RUTA_URL?>/publicacion/borrar_publicacion/' 
                         + datosTabla[i].idPublic + '"><i class="bi-trash" ></i></a></td></tr></tbody></table>' ;
                         

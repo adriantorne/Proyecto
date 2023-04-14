@@ -5,7 +5,7 @@
 
 class Controlador{
 
-    protected $datos= ["rolesPermitidos" => []];
+    protected $datos= ["rolesPermitidos" => [1,3]];
 
     //cargar modelo
     public function modelo($modelo){

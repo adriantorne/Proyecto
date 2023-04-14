@@ -1,21 +1,46 @@
 
-<?php require_once RUTA_APP.'/vistas/inc/header.php'?>
-
-  <div class="w-100 p-3" style="background-color:transparent;background-image: url(<?php echo RUTA_URL?>/imagenes/fondo.jpg); background-size:cover;
-    background-position:right;
-     background-repeat:no-repeat;	
-   height:100vh;">
-   <div class="container text-center w-50">
-   
-      <h2 class="mt-5" style="color:#087f5f;">FUNDACION SARABASTALL</h2>
-        <p class="mt-2 text-center d-none d-sm-block">OBJETIVO: DESARROLLAR PROYECTOS DE COOPERACIÓN ATENDIENDO LAS NECESIDADES BÁSICAS DE LA POBLACIÓN, FOMENTANDO MODELOS DE DESARROLLO SOSTENIBLE, MEJORANDO LA EDUCACIÓN, LA ALIMENTACIÓN A TRAVÉS DE LA AGRICULTURA, LA SALUD Y LA GESTIÓN MEDIOAMBIENTAL DE LOS RECURSOS ENDÓGENOS</p>
-        <a href="<?php echo RUTA_URL?>/login" class=" w-100 w-sm-75 w-md-50 w-lg-50 w-xl-50 btn btn btn-lg" style="background-color:#087f5f; color:white;">ACCEDER</a>
-      </div> 
-    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="imagenes/favicon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> 
+    <link rel="stylesheet" href="<?php echo RUTA_URL?>../css/estilos.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <title>Proyecto</title>
+</head>
+<body onmousemove="mostrar()">
+<div class="collapse " id="navbarToggleExternalContent">
+  <div class="bg-white p-4 d-flex justify-content-center">
+ 
+</nav>
+<a href="<?php echo RUTA_URL?>/login" class="btn btn-primary w-25" ><strong>ACCEDER</strong></a>
   </div>
+</div>
+<nav class="navbar navbar-dark bg-white">
+  <div class="container-fluid">
+    <button class="navbar-toggler text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon bg-dark"></span>
+    </button>
   </div>
+</nav>
 
+<div class="container">
+  <?php
+    echo "<p>No se encuentran publicaciones disponibles por el momento.</p>";
+    echo "<div id='clock' class='d-flex justify-content-center'>".date(" H : i A")."</div>";
+?>
+
+</div>
+
+ 
 </body>
 </html>
+<script>
 
-<?php require_once RUTA_APP.'/vistas/inc/footer.php'?>
+
+
+</script>

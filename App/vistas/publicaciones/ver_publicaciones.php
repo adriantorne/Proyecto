@@ -17,7 +17,7 @@
             </ol>
         </nav>
         
-        <h2 style="color:#e8753f;" class="text-center"><strong><?php echo $datos['publicacion']->tituloPublic?></strong><p class="text-secondary" style="font-size:50%; "><?php echo $validada?></p></h2>
+        <h2 class="text-center"><strong><?php echo $datos['publicacion']->tituloPublic?></strong><p class="text-secondary" style="font-size:50%; "><?php echo $validada?></p></h2>
         <div class="container">
         <form>
             

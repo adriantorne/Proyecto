@@ -2,27 +2,27 @@
 class Publicacion extends Controlador{
     public function __construct(){
 
-        // Sesion::iniciarSesion($this->datos);
+        Sesion::iniciarSesion($this->datos);
            
         $this->publicacionModelo = $this->modelo('PublicacionModelo');
 
-        // $this->datos["rolesPermitidos"] = [10];
+        $this->datos["rolesPermitidos"] = [1,3];
 
-        // if (!tienePrivilegios($this->datos['usuarioSesion']->idRol, $this->datos['rolesPermitidos'])) {
-        //     redireccionar("/inicio");
+        if (!tienePrivilegios($this->datos['usuarioSesion']->rol, $this->datos['rolesPermitidos'])) {
+            redireccionar("/inicio");
           
-        // }
+        }
 
     }
 
 
     public function index(){
-           // $this->datos["rolesPermitidos"] = [10];
+           $this->datos["rolesPermitidos"] = [3];
 
-        // if (!tienePrivilegios($this->datos['usuarioSesion']->idRol, $this->datos['rolesPermitidos'])) {
-        //     redireccionar("/inicio");
+        if (!tienePrivilegios($this->datos['usuarioSesion']->rol, $this->datos['rolesPermitidos'])) {
+            redireccionar("/inicio");
           
-        // }
+        }
         $this->datos["publicaciones"]=$this->publicacionModelo->getPublicaciones();
       
         $this->vista("publicaciones/index",$this->datos);
@@ -31,13 +31,13 @@ class Publicacion extends Controlador{
     }
     public function ver_publicacion($idPublicacion){
   
-        //$this->datos["rolesPermitidos"] = [10];
+        $this->datos["rolesPermitidos"] = [3];
             
-        // if (!tienePrivilegios($this->datos['usuarioSesion']->idRol, $this->datos['rolesPermitidos'])) {
-        //     echo "No tienes privilegios!!!";
-        //     exit();
+        if (!tienePrivilegios($this->datos['usuarioSesion']->rol, $this->datos['rolesPermitidos'])) {
+            echo "No tienes privilegios!!!";
+            exit();
            
-        // }
+        }
     
        // if ($_SERVER["REQUEST_METHOD"]=="POST") {
             // $idTipoBeca=$_POST["tipoBeca"];
@@ -64,13 +64,13 @@ class Publicacion extends Controlador{
     public function borrar_publicacion($idPublicacion){
         
       
-        //$this->datos["rolesPermitidos"] = [10];
+        $this->datos["rolesPermitidos"] = [3];
         
-        // if (!tienePrivilegios($this->datos['usuarioSesion']->idRol, $this->datos['rolesPermitidos'])) {
-        //     echo "No tienes privilegios!!!";
-        //     exit();
+        if (!tienePrivilegios($this->datos['usuarioSesion']->rol, $this->datos['rolesPermitidos'])) {
+            echo "No tienes privilegios!!!";
+            exit();
            
-        // }
+        }
                 
           
             if($this->publicacionModelo->delPublicacion($idPublicacion)){

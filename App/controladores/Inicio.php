@@ -2,10 +2,10 @@
 
 class Inicio extends Controlador{
     public function __construct(){
-    //     Sesion::iniciarSesion($this->datos);
+        Sesion::iniciarSesion($this->datos);
 
-        
-    //     $this->datos["rolesPermitidos"] = [10,20,30];
+        $this->pantallaModelo = $this->modelo('PantallaModelo');
+        $this->datos["rolesPermitidos"] = [1,3];
 
     //    if (!tienePrivilegios($this->datos['usuarioSesion']->idRol, $this->datos['rolesPermitidos'])) {
     //         echo "No tienes privilegios!!!";
@@ -20,6 +20,7 @@ class Inicio extends Controlador{
         
          
         }else {
+            $this->datos["pantallas"]=$this->pantallaModelo->getPantallas();
             $this->vista("index", $this ->datos);
         }
     }

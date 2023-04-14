@@ -12,10 +12,10 @@
 </head>
 <header>
 <!-- Navbar -->
-<nav style="background-color:#0583c3;" class="navbar navbar-expand-lg navbar-light">
-  <div class="container-fluid">
-    <a class="navbar-brand fw-bold text-white" href="https://cpifpbajoaragon.com/"><img style="width:30px;"src="<?php echo RUTA_URL?>../imagenes/logo1.png"> CPIFP BAJO ARAGON</a>
-    <a href="#" class="text-white nav-link"><i class="bi bi-box-arrow-left"></i> LOGOUT</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light text-black">
+  <div class="container-fluid text-dark">
+    <a class="navbar-brand fw-bold " href="https://cpifpbajoaragon.com/"><img style="width:30px;"src="<?php echo RUTA_URL?>../imagenes/logo1.png"> CPIFP BAJO ARAGON</a>
+    <a title="Cerrar sesion" href="<?php echo RUTA_URL?>/login/logout" class=" nav-link"><i class="bi bi-box-arrow-left" style="width:200%;"></i> <strong><?php echo $datos['usuarioSesion']->nombreUser?></strong></a>
   </div>
  
   <!-- <div class="dropdown">

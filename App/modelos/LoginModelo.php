@@ -8,6 +8,7 @@
         }
 
         public function loginUsuario($datos){
+           
             $this->db->query("SELECT * 
                                     FROM usuario 
                                     WHERE nombreUser=:user and claveUser=sha2(:password,256)");
