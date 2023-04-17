@@ -27,6 +27,7 @@
          <a class="btn btn-primary w-100"  data-bs-toggle="modal" data-bs-target="#pantallas">+ Añadir Pantalla</a>
          </div>
 </div>
+
   <table class="table table-hover shadow" >
         <thead>
             <tr style="background-color:#7c7c74;" class="text-light">

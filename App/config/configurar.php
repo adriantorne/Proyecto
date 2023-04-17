@@ -15,7 +15,7 @@ define('RUTA_URL', 'http://localhost/Proyecto');
 define('NOMBRE_SITIO', 'Sarabastall1');
 
 //configuracio de la base de datos
-
+date_default_timezone_set('Europe/Madrid');
 define('DB_HOST', '127.0.0.1');
 define('DB_USUARIO', 'root');
 define('DB_PASSWORD', '');

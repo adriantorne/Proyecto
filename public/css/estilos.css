@@ -50,13 +50,70 @@
     height: 100px;
   }
 
-  #clock{
-    border: 1px solid black;
-    background-color: white;
+ 
 
-    
-    font-size: 20vh;
-    color: black;
+#reloj{
+  background-image: linear-gradient(62deg, #5daeff 0%, #bd76ff 100%);
+  color : black;
+  font-size : 700%; 
+  text-align : center;
+  border-radius: 45px;
+  border:3px solid black;
+}
+#menu-container {
+  background-color: #043b83;
+  width: 10%;
+  display: none;
+  color: white;
+}
+
+#menu {
+  display: flex;
+  list-style: none;
+  
+}
+
+#menu li {
+  margin-right: 20px;
+}
+
+#menu li:last-child {
+  margin-right: 0;
+}
+
+#menu a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 15px;
+  display: block;
+}
+
+.show-menu {
+  display: block !important;
+}
+
+/* Estilos para modo oscuro */
+body.dark-mode {
+  background-color: #222;
+  color: #fff;
+}
+.btn-oscuro{
+  background-color: #043b83;
+  border: 1px solid #043b83;
+}
+
+
+
+
+@media (max-width: 600px) {
+  #reloj{
     background-image: linear-gradient(62deg, #5daeff 0%, #bd76ff 100%);
-    border-radius: 25px;
+    color : black;
+    font-size : 330%; 
+    text-align : center;
+    border-radius: 30px;
+    border:3px solid black;
+  }
 }

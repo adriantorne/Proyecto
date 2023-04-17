@@ -1,6 +1,6 @@
 
     <?php include 'inc/header.php'?>
-      
+    
     <section class="container mt-3">
             <h2 class="text-center mb-3"><strong>Submenu</strong> de Navegación</h2>
 
@@ -112,7 +112,7 @@
                 <?php  if (tienePrivilegios($datos['usuarioSesion']->rol, [3])):?>
                 <div class="col-sm-12 col-md-6 col-lg-4 capa mb-3"> <!-- Alineación adaptable de Bootstrap -->
                     <div class="submenu"> 
-                        <a href="#" data-bs-toggle="modal" class="linksmenu" style="text-decoration:none; color:black;" data-bs-target="#perfil"> <!-- Aqui se llama al Modal Perfil -->
+                        <a href="<?php echo RUTA_URL?>/ubicacion"  class="linksmenu" style="text-decoration:none; color:black;" > <!-- Aqui se llama al Modal Perfil -->
                             <div style="  background-color:#7494bc;" class="icono_submenu text-center">
                                 <i class="bi bi-geo-alt" style="font-size:400%;"></i>
                             </div>
@@ -224,6 +224,7 @@
             </div>
         </div>
     </div>
+    <script src="<?php echo RUTA_URL?>../js/main.js"></script>
     <!-- ==================== FIN MODAL PUBLICACIÓN ==================== -->
     <?php include 'inc/footer.php'?>
     <script>
