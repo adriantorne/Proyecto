@@ -21,9 +21,9 @@
 
  <nav class="navbar navbar-expand-lg navbar-light bg-light text-black">
   <div class="container-fluid text-dark">
-    <a class="navbar-brand fw-bold " href="https://cpifpbajoaragon.com/"><img style="width:30px;"src="<?php echo RUTA_URL?>../imagenes/logo1.png"> CPIFP BAJO ARAGON</a>
+    <a class="navbar-brand fw-bold " href="https://cpifpbajoaragon.com/"><img style="width:30px;"src="<?php echo RUTA_URL?>../imagenes/logo2.png"> CPIFP BAJO ARAGON</a>
   
-    <a href="<?php echo RUTA_URL?>/login" id="menu-container" class="btn" ><strong><i class="bi bi-door-open"></i> ACCEDER</strong></a>
+    <a  style="background-color:ff8000; border-color:ff8000;" href="<?php echo RUTA_URL?>/login" id="menu-container" class="btn"><strong><i class="bi bi-door-open"></i> ACCEDER</strong></a>
 
   </div>
  

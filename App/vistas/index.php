@@ -1,6 +1,6 @@
 
     <?php include 'inc/header.php'?>
-    
+
     <section class="container mt-3">
             <h2 class="text-center mb-3"><strong>Submenu</strong> de Navegación</h2>
 
@@ -17,7 +17,7 @@
                 <div class="col-sm-12 col-md-6 col-lg-4 capa mb-3"> <!-- Alineación adaptable de Bootstrap -->
                     <div class="submenu"> 
                         <a href="#" data-bs-toggle="modal" class="linksmenu" style="text-decoration:none; color:black;" data-bs-target="#perfil"> <!-- Aqui se llama al Modal Perfil -->
-                            <div style="background-color:#7494bc;" class="icono_submenu text-center">
+                            <div style="background-color:#e6a964;" class="icono_submenu text-center">
                                 <i class="bi bi-person-circle" style="font-size:400%;"></i>
                             </div>
                             <div class="texto_submenu text-center">
@@ -29,7 +29,7 @@
                 <div class="col-sm-12 col-md-6 col-lg-4 capa mb-3"> <!-- Alineación adaptable de Bootstrap -->
                     <div class="submenu"> 
                         <a href="#" data-bs-toggle="modal" data-bs-target="#publicacion" style="text-decoration:none; color:black;" data-bs-target="#perfil"> <!-- Aqui se llama al Modal Perfil -->
-                            <div  style="background-color:#7494bc;" class="icono_submenu text-center">
+                            <div  style="background-color:#e6a964;" class="icono_submenu text-center">
                                 <i class="bi bi-file-plus" style="font-size:400%;"></i>
                             </div>
                             <div class="texto_submenu text-center">
@@ -43,7 +43,7 @@
                 <div class="col-sm-12 col-md-6 col-lg-4 capa mb-3"> <!-- Alineación adaptable de Bootstrap -->
                     <div class="submenu"> 
                         <a href="<?php echo RUTA_URL?>/pantalla" style="text-decoration:none; color:black;" data-bs-target="#perfil"> <!-- Aqui se llama al Modal Perfil -->
-                            <div style="  background-color:#7494bc;" class="icono_submenu text-center">
+                            <div style="  background-color:#e6a964;" class="icono_submenu text-center">
                                 <i class="bi bi-display" style="font-size:400%;"></i>
                             </div>
                             <div class="texto_submenu text-center">
@@ -57,7 +57,7 @@
                 <div class="col-sm-12 col-md-6 col-lg-4 capa mb-3"> <!-- Alineación adaptable de Bootstrap -->
                     <div class="submenu"> 
                         <a href="#" data-bs-toggle="modal" class="linksmenu" style="text-decoration:none; color:black;" data-bs-target="#perfil"> <!-- Aqui se llama al Modal Perfil -->
-                            <div style="background-color:#7494bc;" class="icono_submenu text-center">
+                            <div style="background-color:#e6a964;" class="icono_submenu text-center">
                                 <i class="bi bi-people" style="font-size:400%;"></i>
                             </div>
                             <div class="texto_submenu text-center">
@@ -69,13 +69,20 @@
               <?php endif?>
               <?php  if (tienePrivilegios($datos['usuarioSesion']->rol, [3])):?>
                 <div class="col-sm-12 col-md-6 col-lg-4 capa mb-3"> <!-- Alineación adaptable de Bootstrap -->
-                    <div class="submenu"> 
-                        <a href="#" data-bs-toggle="modal" class="linksmenu" style="text-decoration:none; color:black;" data-bs-target="#perfil"> <!-- Aqui se llama al Modal Perfil -->
-                            <div style="  background-color:#7494bc;" class="icono_submenu text-center">
+                    <div class="submenu">
+                         <?php foreach($datos['publicacion']as $cantidad):?>
+                        
+                        <a href="<?php echo RUTA_URL?>/publicacion/validar_publicaciones" class="linksmenu" style="text-decoration:none; color:black;" > <!-- Aqui se llama al Modal Perfil -->
+                            <div style=" background-color:#e6a964;" class="icono_submenu text-center">
                                 <i class="bi bi-patch-check" style="font-size:400%;"></i>
+                                <span class="badge rounded-pill bg-danger rounded"><?php echo $cantidad->cantidad?></span>
                             </div>
                             <div class="texto_submenu text-center">
-                                <h3>Validar Publicaciones</h3>
+                                
+                                    
+                                <h3>Validar Publicaciones  </h3>
+                                 
+                                <?php endforeach?>
                             </div>
                         </a>
                     </div>
@@ -85,7 +92,7 @@
                 <div class="col-sm-12 col-md-6 col-lg-4 capa mb-3"> <!-- Alineación adaptable de Bootstrap -->
                     <div class="submenu"> 
                         <a href="#" data-bs-toggle="modal" class="linksmenu" style="text-decoration:none; color:black;" data-bs-target="#perfil"> <!-- Aqui se llama al Modal Perfil -->
-                            <div style="  background-color:#7494bc;" class="icono_submenu text-center">
+                            <div style="  background-color:#e6a964;" class="icono_submenu text-center">
                                 <i class="bi bi-journal-check" style="font-size:400%;"></i>
                             </div>
                             <div class="texto_submenu text-center">
@@ -99,7 +106,7 @@
                 <div class="col-sm-12 col-md-6 col-lg-4 capa mb-3"> <!-- Alineación adaptable de Bootstrap -->
                     <div class="submenu"> 
                         <a href="<?php echo RUTA_URL?>/publicacion" style="text-decoration:none; color:black;"> 
-                            <div style="  background-color:#7494bc;" class="icono_submenu text-center">
+                            <div style="  background-color:#e6a964;" class="icono_submenu text-center">
                                 <i class="bi bi-book" style="font-size:400%;"></i>
                             </div>
                             <div class="texto_submenu text-center">
@@ -113,7 +120,7 @@
                 <div class="col-sm-12 col-md-6 col-lg-4 capa mb-3"> <!-- Alineación adaptable de Bootstrap -->
                     <div class="submenu"> 
                         <a href="<?php echo RUTA_URL?>/ubicacion"  class="linksmenu" style="text-decoration:none; color:black;" > <!-- Aqui se llama al Modal Perfil -->
-                            <div style="  background-color:#7494bc;" class="icono_submenu text-center">
+                            <div style="  background-color:#e6a964;" class="icono_submenu text-center">
                                 <i class="bi bi-geo-alt" style="font-size:400%;"></i>
                             </div>
                             <div class="texto_submenu text-center">
@@ -126,7 +133,7 @@
                 <div class="col-sm-12 col-md-6 col-lg-4 capa mb-3"> <!-- Alineación adaptable de Bootstrap -->
                     <div class="submenu"> 
                         <a href="#" data-bs-toggle="modal" class="linksmenu" style="text-decoration:none; color:black;" data-bs-target="#perfil"> <!-- Aqui se llama al Modal Perfil -->
-                            <div style="  background-color:#7494bc;" class="icono_submenu text-center">
+                            <div style="  background-color:#e6a964;" class="icono_submenu text-center">
                                 <i class="bi bi-newspaper" style="font-size:400%;"></i>
                             </div>
                             <div class="texto_submenu text-center">
@@ -149,7 +156,7 @@
                 </div>
                 
                 <!-- CONTENIDO DEL MODAL PUBLICACIÓN -->
-                <form id="formPubli" method="post" action="" enctype="multipart/form-data">
+                <form id="formPubli" method="post" enctype="multipart/form-data">
                 <div class="modal-body"> 
 
                     
@@ -162,12 +169,12 @@
                     
                         <div class="form-check form-check-inline w-25">
                             <label class="form-check-label"> 
-                            <input class="form-check-input" type="checkbox" value="<?php echo $pantalla->idPantalla?>" id="flexCheckDefault"> 
+                            <input class="form-check-input" name="pantalla[]" type="checkbox" value="<?php echo $pantalla->idPantalla?>" id="flexCheckDefault"> 
                             <?php echo $pantalla->nombrePantalla?>
                             </label>
                             </div>
                         <?php endforeach?>
-                        <button type="button" id="botonMarcar" class="btn btn-primary btn-sm mt-2" onclick="marcarTodos()">Marcar todos</button><br>
+                        <button type="button" id="botonMarcar" class="btn btn-primary btn-sm mt-2"  style="background-color:#ff8000; border-color:#ff8000;" onclick="marcarTodos()">Marcar todos</button><br>
                     
                     </div>
                     
@@ -212,13 +219,13 @@
                      
                     </div>
 
-                    
+                    <input type="hidden" value="<?php  echo $datos['usuarioSesion']->idUser?>" name="usuario">
                 </div>
 
                         
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary" name="publiButton">Publicar</button>
+                    <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary"  style="background-color:#ff8000; border-color:#ff8000;">Publicar</button>
                 </div>
                 </form>
             </div>

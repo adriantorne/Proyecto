@@ -42,4 +42,30 @@ class Ubicacion extends Controlador{
      
        }  
     }
+
+
+    public function borrar_ubicacion($idUbc){
+        
+     
+        $this->datos["rolesPermitidos"] = [3];
+        
+        if (!tienePrivilegios($this->datos['usuarioSesion']->rol, $this->datos['rolesPermitidos'])) {
+            echo "No tienes privilegios!!!";
+            exit();
+           
+        }
+                
+          
+        if($this->ubicacionModelo->delUbicacion($idUbc)){
+                redireccionar("/ubicacion");
+                
+            } else{
+                echo "se ha producido un error!!!!";
+            }
+    
+       
+        
+    }
+    
+
 }

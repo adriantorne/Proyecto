@@ -84,4 +84,51 @@ class Publicacion extends Controlador{
         
     }
 
+    public function validar_publicaciones(){
+        $this->datos["rolesPermitidos"] = [3];
+            
+        if (!tienePrivilegios($this->datos['usuarioSesion']->rol, $this->datos['rolesPermitidos'])) {
+            echo "No tienes privilegios!!!";
+            exit();
+           
+        }
+
+        if ($_SERVER["REQUEST_METHOD"]=="POST") {
+            $motivo=$_POST["motivoDen"];
+            $idPublic=$_POST['idPublic'];
+            
+            if($this->publicacionModelo->denPublicacion($motivo,$idPublic)){
+                redireccionar("/publicacion/validar_publicaciones");
+            
+            } else{
+                    echo "se ha producido un error!!!!";
+            }
+                
+    
+        }else{
+            $this->datos["pantallas"]=$this->publicacionModelo->getPublicacionPantalla();    
+        $this->datos["pendientes"]=$this->publicacionModelo->getPublicacionPendientes();
+
+        $this->vista("publicaciones/validar_publicaciones",$this->datos);
+        }
+    
+    }
+    public function validar_publicacion($idPublic){
+        $this->datos["rolesPermitidos"] = [3];
+            
+        if (!tienePrivilegios($this->datos['usuarioSesion']->rol, $this->datos['rolesPermitidos'])) {
+            echo "No tienes privilegios!!!";
+            exit();
+           
+        }
+        
+        if($this->publicacionModelo->valPublicacion($idPublic)){
+            redireccionar("/publicacion/validar_publicaciones");
+            
+        } else{
+            echo "se ha producido un error!!!!";
+        }
+  
+    }
+
 }

@@ -33,7 +33,7 @@
             </div>
             <?php else:?>
             <div class="mb-3 d-flex justify-content-center aligns-items-center">
-                <img width="400" src="<?php echo RUTA_URL?>../imagenes/<?php echo $datos['publicacion']->archivo?>">
+                <img width="400" src="<?php echo RUTA_URL?>../img/<?php echo $datos['publicacion']->archivo?>">
             </div>
             <?php endif?>
             <div class="mb-3">

@@ -30,4 +30,26 @@
                 return false;
             }
     }
+
+
+
+    function delUbicacion($idUbc){
+
+       
+        $this->db->query("DELETE FROM pantalla where idUbc=:idUbc");
+        $this->db->bind(':idUbc', $idUbc);
+
+        $this->db->execute();
+
+        $this->db->query("DELETE FROM ubicacion where idUbc=:idUbc");
+        $this->db->bind(':idUbc', $idUbc);
+
+       
+
+        if ($this->db->execute()) {
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

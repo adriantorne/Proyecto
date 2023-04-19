@@ -13,15 +13,13 @@
       <h2  class="text-center"><strong>Ubicaciones <i class="bi bi-geo-alt"></i></strong> </h2>
       </div>
   </div>
-  <div class="row">
-  <a class="btn btn-primary col-2 mt-3"   data-bs-toggle="modal" data-bs-target="#ubicacion">+ Añadir Ubicacion</a>
-  
-  <form class="d-flex mt-3 col-10" role="search">
+
+<a class="btn btn-primary mt-3"   data-bs-toggle="modal" data-bs-target="#ubicacion" style="background-color:#ff8000; border-color:#ff8000;" >+ Añadir Ubicacion</a>
+<form class="d-flex mt-3" role="search">
       <input class="form-control me-2" type="search" placeholder="Buscar ubicacion" id="buscador" aria-label="Search">
       <button class="btn btn-outline-success" type="submit" onclick="return buscarUbi()" ><i class="bi bi-search"></i></button>
   </form>
-</div> 
-
+ 
           <ul class="list-group list-group-flush mt-4" id="usuarios">
 
           <!-- <?php foreach ($datos['ubicaciones'] as $ubicacion) {?>
@@ -171,7 +169,7 @@
                         
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary" name="publiButton">Añadir</button>
+                    <button type="submit" class="btn btn-primary"  style="background-color:#ff8000; border-color:#ff8000;" name="publiButton">Añadir</button>
                 </div>
                 </form>
             </div>
@@ -229,7 +227,7 @@ function change(page){
 
     if (page * obj_per_page>datosTabla.length) {
         for (var i = (page-1) * obj_per_page; i < datosTabla.length; i++) {
-          listing_table.innerHTML += '<li class="shadow list-group-item mb-2"><img class="rounded" style="width:30px;" src="img/ubicacion.png"> ' + datosTabla[i].nombreUbc
+          listing_table.innerHTML += '<li class="shadow list-group-item mb-2"><img class="rounded" style="width:30px;" src="imagenes/ubicacion.png"> ' + datosTabla[i].nombreUbc
             +'<div class="mt-1 mb-1"><a class="btn btn-outline-success btn-sm"  data-bs-toggle="modal" data-bs-target="#ver'+datosTabla[i].idUbc+'">'+" "+'<i class="bi bi-display"></i> <a class="btn btn-outline-danger btn-sm" onclick="confirmar(event)" href="<?php echo RUTA_URL?>/ubicacion/borrar_ubicacion/' 
             + datosTabla[i].idUbc + '"><i class="bi-trash" ></i></a></div></li>' ;
 
@@ -237,8 +235,8 @@ function change(page){
     }else{
         for (var i = (page-1) * obj_per_page; i < (page * obj_per_page); i++) {
 
-          listing_table.innerHTML += '<li class="shadow list-group-item mb-2"><img class="rounded" style="width:30px;" src="img/ubicacion.png"> ' + datosTabla[i].nombreUbc
-            +'<div class="mt-1 mb-1"><a class="btn btn-outline-success btn-sm"  data-bs-toggle="modal" data-bs-target="#ver'+datosTabla[i].idUbc+'">'+" "+'<i class="bi bi-display"></i> <a class="btn btn-outline-danger btn-sm" onclick="confirmar(event)" href="<?php echo RUTA_URL?>/ubicacion/borrar_ubicacion/' 
+          listing_table.innerHTML += '<li class="shadow list-group-item mb-2"><img class="rounded" style="width:30px;" src="imagenes/ubicacion.png"> ' + datosTabla[i].nombreUbc
+            +'<div class="mt-1 mb-1"><a class="btn btn-outline-success btn-sm"  data-bs-toggle="modal" data-bs-target="#ver'+datosTabla[i].idUbc+'"><i class="bi bi-display"></i><a class="btn btn-outline-danger btn-sm" onclick="confirmar(event)" href="<?php echo RUTA_URL?>/ubicacion/borrar_ubicacion/' 
             + datosTabla[i].idUbc + '"><i class="bi-trash" ></i></a></div></li>' ;
 
         }
@@ -275,7 +273,7 @@ function buscarUbi(){
        const datos=<?php echo json_encode($datos['ubicaciones']) ?>
 
 
-       const datosFil=datos.filter(e=>e.NombreRol.toUpperCase()==filter);
+       const datosFil=datos.filter(e=>e.nombreUbc.toUpperCase()==filter);
         console.log(datosFil);
 
 
@@ -286,10 +284,10 @@ function buscarUbi(){
             var ul = document.getElementById("usuarios");
 
             var li = document.createElement('li');
-            li.className= "list-group-item mb-2";
+            li.className= "shadow list-group-item mb-2";
                                         
             var img = document.createElement('img');
-            img.src="img/usuario.png";
+            img.src="imagenes/ubicacion.png";
             img.className="rounded";
             img.style="width:30px;";       
 
@@ -300,17 +298,17 @@ function buscarUbi(){
 
             var a=document.createElement("a");
             a.className="btn btn-outline-success btn-sm";
-            a.setAttribute("href", "<?php echo RUTA_URL?>/usuario/ver_usuario/"+e.idUbc+"");
-
+            a.setAttribute("data-bs-toggle", "modal");
+            a.setAttribute("data-bs-target","#ver"+e.idUbc+"");
             var i = document.createElement("i");
-            i.className="bi-eye";
+            i.className="bi-display";
 
             var a1=document.createElement("a");
             a1.className="btn btn-outline-danger btn-sm";
             a1.onclick=function(){
             confirmar(event);
             }
-            a1.setAttribute("href", "<?php echo RUTA_URL?>/usuario/borrar_usuario/"+e.idUbc+"");
+            a1.setAttribute("href", "<?php echo RUTA_URL?>/ubicacion/borrar_ubicacion/"+e.idUbc+"");
             var txt1= document.createTextNode(" ");
             var i1 = document.createElement("i");
             i1.className="bi-trash";
@@ -328,7 +326,7 @@ function buscarUbi(){
 
             });
 
-
+            return false;
         
     
 

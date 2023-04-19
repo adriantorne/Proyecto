@@ -24,7 +24,7 @@
     
          </div>
          <div class="col-4">
-         <a class="btn btn-primary w-100"  data-bs-toggle="modal" data-bs-target="#pantallas">+ Añadir Pantalla</a>
+         <a class="btn btn-primary w-100" style="background-color:#ff8000; border-color:#ff8000; width:10%;" data-bs-toggle="modal" data-bs-target="#pantallas">+ Añadir Pantalla</a>
          </div>
 </div>
 
@@ -34,7 +34,7 @@
         
                 <th scope="col">Nombre</th>
                 <th scope="col">MAC</th>
-                <th scope="col">Ubicacion</th>
+                <th scope="col"><a style="color:white;" href="<?php echo RUTA_URL?>/ubicacion">Ubicación</a></th>
                 <th scope="col">Acciones</th>
               
                 
@@ -110,7 +110,7 @@
                         
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary" name="publiButton">Modificar</button>
+                    <button type="submit" class="btn btn-primary"  style="background-color:#ff8000; border-color:#ff8000;" name="publiButton">Modificar</button>
                 </div>
                 </form>
             </div>
@@ -166,8 +166,8 @@
 
                         
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary" name="publiButton">Añadir</button>
+                    <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary"  style="background-color:#ff8000; border-color:#ff8000;"  name="publiButton">Añadir</button>
                 </div>
                 </form>
             </div>
