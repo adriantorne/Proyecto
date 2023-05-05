@@ -3,7 +3,7 @@
     
   <div class="row d-flex justify-content-center text-center mx-0 mt-3">
       <div class="col-12">
-      <h1>INICIO SESION</h1>
+      <h1>INICIO SESIÓN</h1>
       </div>
   </div> 
 
@@ -15,21 +15,25 @@
   <form method="post">
     <div class="row d-flex justify-content-center text-center mx-0 mt-3">
       <div class="mb-3 col-5">
-        <input type="text" class="form-control bg-light"  name="usuario" placeholder="Usuario" required>   
+        <input type="text" class="form-control bg-white"  name="usuario" placeholder="Usuario" required>   
       </div>
     </div>
     <div class="row d-flex justify-content-center text-center mx-0 mt-3">
       <div class="mb-3 col-5">
-        <input type="password" class="form-control bg-light"  name="pass" placeholder="Contraseña" required>
+      
+        <input type="password" class="form-control bg-white" id="password"  name="pass" placeholder="Contraseña" required>
+        <a class="btn btn-light mt-2 w-50" type="button" onclick="mostrarContrasena()"><i class="bi bi-eye"> Mostrar contraseña</i></a>
       </div>
+    
+
     </div>
 
       <div class="col-12 text-center">
-        <button type="submit" class=" w-25 btn btn-light btn-lg border border-dark ">ENTRAR</button>
+        <button type="submit" class=" w-25 btn btn-outline-dark btn-lg border border-dark ">ENTRAR</button>
       </div>
 
-      <div  class="mt-3 col-12 text-center">
-        <a href="<?php echo RUTA_URL?>/login/recuperarPass">¿Has olvidado tu contraseña?</a>
+      <div  class="mt-3 col-12 text-center ">
+        <a class="text-dark" href="<?php echo RUTA_URL?>/login/recuperarPass">¿Has olvidado tu contraseña?</a>
       </div>
       
   </form>
@@ -37,4 +41,13 @@
     
 </body>
 </html>
-    
+    <script>
+      function mostrarContrasena(){
+      var tipo = document.getElementById("password");
+      if(tipo.type == "password"){
+          tipo.type = "text";
+      }else{
+          tipo.type = "password";
+      }
+  }
+    </script>

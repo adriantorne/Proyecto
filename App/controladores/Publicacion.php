@@ -5,7 +5,8 @@ class Publicacion extends Controlador{
         Sesion::iniciarSesion($this->datos);
            
         $this->publicacionModelo = $this->modelo('PublicacionModelo');
-
+        $this->pantallaModelo = $this->modelo('PantallaModelo');
+        $this->ubicacionModelo = $this->modelo('UbicacionModelo');
         $this->datos["rolesPermitidos"] = [1,3];
 
         if (!tienePrivilegios($this->datos['usuarioSesion']->rol, $this->datos['rolesPermitidos'])) {
@@ -23,11 +24,39 @@ class Publicacion extends Controlador{
             redireccionar("/inicio");
           
         }
+        $this->datos["pantallas"]=$this->publicacionModelo->getPublicacionPantalla();    
+        $this->datos["pendientes"]=$this->publicacionModelo->getPublicacionPendientes();
         $this->datos["publicaciones"]=$this->publicacionModelo->getPublicaciones();
       
         $this->vista("publicaciones/index",$this->datos);
      
         
+    }
+    public function misPublicaciones($idUser){
+        $this->datos["rolesPermitidos"] = [1,3];
+
+        if (!tienePrivilegios($this->datos['usuarioSesion']->rol, $this->datos['rolesPermitidos'])) {
+            redireccionar("/inicio");
+          
+        }
+         if ($_SERVER["REQUEST_METHOD"]=="POST") {
+            $datos=$_POST;
+            $idPublic=$_POST['idPublic'];
+             if($this->publicacionModelo->editPublicacion($datos)){
+                $this->datos["pantallas"]=$this->publicacionModelo->getPublicacionPantalla();    
+                $this->datos["pendientes"]=$this->publicacionModelo->getPublicacionPendientes();
+                $this->datos["mispublicaciones"]=$this->publicacionModelo->getMisPublicaciones($idUser);
+                $this->vista("publicaciones/mispublicaciones",$this->datos);
+            } else{
+                    echo "se ha producido un error!!!!";
+            }
+         }else{
+            $this->datos["pantallas"]=$this->publicacionModelo->getPublicacionPantalla();    
+            $this->datos["pendientes"]=$this->publicacionModelo->getPublicacionPendientes();
+            $this->datos["mispublicaciones"]=$this->publicacionModelo->getMisPublicaciones($idUser);
+            $this->vista("publicaciones/mispublicaciones",$this->datos);
+         }
+   
     }
     public function ver_publicacion($idPublicacion){
   

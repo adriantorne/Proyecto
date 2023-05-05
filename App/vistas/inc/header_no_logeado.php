@@ -12,9 +12,9 @@
 </head>
 <header>
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-dark text-white">
+<nav class="navbar navbar-expand-lg navbar-light bg-white text-dark">
   <div class="container-fluid">
-    <a class="navbar-brand fw-bold text-white" href="https://cpifpbajoaragon.com/"><img style="width:30px;"src="imagenes/logo2.png"> CPIFP BAJO ARAGON</a>
+    <a class="navbar-brand fw-bold text-dark" href="https://cpifpbajoaragon.com/"><img style="width:30px;"src="<?php echo RUTA_URL?>../imagenes/logo1.png"> CPIFP BAJO ARAGON</a>
   </div>
   <!-- <div class="dropdown">
   <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
@@ -31,4 +31,4 @@
 
 <!-- Navbar -->
 </header>  
-<body class="bg-white">
+<body class="bg-light">

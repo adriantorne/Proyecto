@@ -7,8 +7,9 @@
       <li id="lipan" class="breadcrumb-item active" aria-current="page">Validar publicaciones</li>
     </ol>
   </nav>
+  <?php if($datos['pendientes']!=[]):?>  
         <h2  class="text-center"><strong>Validar publicaciones <i class="bi bi-patch-check"></i></strong> </h2>
-
+       
                 <div class="col-4 mb-2">
             <form class="form-inline">
             
@@ -22,13 +23,12 @@
             </form>
         </div>
 
-        
+      
         <table class="table table-hover shadow" >
         <thead>
-            <tr style="background-color:#7c7c74;" class="text-light">
+            <tr style="background-color:#043b83;" class="text-light">
         
                 <th scope="col">Titulo</th>
-                <th scope="col">Mensaje</th>
                 <th scope="col">Fecha creacion</th>
                 <th scope="col">Fecha Inicio</th>
                 <th scope="col">Fecha Fin</th>
@@ -44,7 +44,7 @@
             <tr>
            
                 <td  style="max-width:300px; overflow:hidden;"><?php echo $pendientes->tituloPublic?></td>
-                <td class="h-25"style="max-width:300px; overflow:hidden;"><?php echo $pendientes->mensajePublic?></td>
+                
                 <td><?php echo $pendientes->fechaCreacion?></td>
                 <td><?php echo $pendientes->fechaInicio?></td>
                 <td><?php echo $pendientes->fechaLimite?></td>
@@ -68,7 +68,9 @@
             </tr>
         </tbody>
         </table>
-
+<?php else:?>
+    <h2>NO HAY PUBLICACIONES PENDIENTES DE VALIDACION</h2>
+<?php endif?>
     </body>
 </html>
 
@@ -95,7 +97,7 @@
             <div class="modal-body ms-3">
                 <p><?php echo $pendientes->mensajePublic?></p><br>
                 <?php if($pendientes->archivo!=""):?>
-                <img src="<?php echo RUTA_URL?>../img/<?php echo $pendientes->archivo?>"><br>
+                <img src="<?php echo RUTA_URL?>../img/<?php echo $pendientes->archivo?>" width="160"><br>
                 <?php else:?>
             
                     <div id="aquiimagen" class="d-flex justify-content-center align-items-center form-control">

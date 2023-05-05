@@ -35,6 +35,16 @@
     return $this->db->registros();
  }
 
+        public function getPublicacionPantallaCarrousel($mac,$date){
+            $this->db->query("SELECT publicacion.idPublic, pantalla.nombrePantalla, publicacion.tituloPublic,publicacion.mensajePublic,publicacion.archivo FROM publicacion 
+            left JOIN asignar ON asignar.idPublic=publicacion.idPublic
+            left JOIN pantalla ON pantalla.idPantalla= asignar.idPantalla where pantalla.MAC=:mac and publicacion.fechaInicio<=:fechahoy and publicacion.fechaLimite>=:fechahoy and validada='1'");
+        
+        $this->db->bind(':mac', $mac);
+        $this->db->bind(':fechahoy', $date);
+            return $this->db->registros();
+        }
+
 
      public function getCantPubl(){
         $this->db->query("SELECT count(idPublic) as cantidad
@@ -159,4 +169,32 @@
                         return false;
                     }
                 }
+               public function getMisPublicaciones($idUser){
+                    $this->db->query("SELECT publicacion.*
+                    FROM publicacion
+                    WHERE idUser = :idUser and (validada='1' or validada='-1') order by fechaCreacion desc");
+                    $this->db->bind(':idUser', $idUser);
+                    return $this->db->registros();
+               }
+               public function editPublicacion($datos){
+                
+                    $this->db->query("UPDATE publicacion set validada='0' , tituloPublic=:titulo, mensajePublic=:mensaje,
+                    fechaInicio=:fechaInicio,fechaLimite=:fechaFin, fechaAutorizacion=NULL, motivoDenegacion=NULL
+                     where idPublic = :idPublic");
+                    
+
+                    $this->db->bind(':titulo',trim($datos['titulo']));
+                    $this->db->bind(':mensaje',trim($datos['mensaje']));
+                    $this->db->bind(':fechaInicio',trim($datos['fechaInicio']));
+                    $this->db->bind(':fechaFin',trim($datos['fechaFin']));
+                    $this->db->bind(':idPublic',$datos['idPublic']);
+
+                    if ($this->db->execute()) {
+                        return true;
+                    }else{
+                        return false;
+                    }
+                
+             
+               }
     }

@@ -53,8 +53,8 @@
  
 
 #reloj{
-  background-image: linear-gradient(62deg, #ff8000 0%, #e30a02 100%);
-  color : black;
+  background-image: linear-gradient(62deg, #144684 0%, #2173d9 100%);
+  color : white;
   font-size : 700%; 
   text-align : center;
   border-radius: 45px;
@@ -104,9 +104,94 @@ body.dark-mode {
   border: 1px solid #043b83;
 }
 
+/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+.flip-card {
+  background-color: transparent;
+  width: 300px;
+  height: 200px;
+  border: 1px solid #f1f1f1;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
 
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
 
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
 
+/* Position the front and back side */
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+  background-color: #bbb;
+  color: black;
+}
+
+/* Style the back side */
+.flip-card-back {
+  background-color: dodgerblue;
+  color: white;
+  transform: rotateY(180deg);
+}
+.card {
+  position: relative;
+  display: inline-block;
+  margin: 20px;
+  width: 300px;
+  height: 200px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.1);
+  z-index: 1;
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.card:hover .card-overlay {
+  bottom: 30%;
+}
+
+.card-overlay h2 {
+  margin-top: 0;
+}
+
+.card-overlay p {
+  margin-bottom: 0;
+}
 @media (max-width: 600px) {
   #reloj{
     background-image: linear-gradient(62deg, #5daeff 0%, #bd76ff 100%);
@@ -116,4 +201,34 @@ body.dark-mode {
     border-radius: 30px;
     border:3px solid black;
   }
-}
+    #menu-container {
+      background-color: #043b83;
+      width: 30%;
+      display: none;
+      color: white;
+    }
+    
+    #menu {
+      display: flex;
+      list-style: none;
+      
+    }
+    
+    #menu li {
+      margin-right: 20px;
+    }
+    
+    #menu li:last-child {
+      margin-right: 0;
+    }
+    
+    #menu a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 10px;
+      font-weight: bold;
+      padding: 10px 15px;
+      display: block;
+    }
+    
+  }

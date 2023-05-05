@@ -24,13 +24,13 @@
     
          </div>
          <div class="col-4">
-         <a class="btn btn-primary w-100" style="background-color:#ff8000; border-color:#ff8000; width:10%;" data-bs-toggle="modal" data-bs-target="#pantallas">+ Añadir Pantalla</a>
+         <a class="btn btn-primary w-100" style="background-color:#043b83; border-color:#043b83; width:10%;" data-bs-toggle="modal" data-bs-target="#pantallas">+ Añadir Pantalla</a>
          </div>
 </div>
 
   <table class="table table-hover shadow" >
         <thead>
-            <tr style="background-color:#7c7c74;" class="text-light">
+            <tr style="background-color:#043b83;" class="text-light">
         
                 <th scope="col">Nombre</th>
                 <th scope="col">MAC</th>
@@ -110,7 +110,7 @@
                         
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary"  style="background-color:#ff8000; border-color:#ff8000;" name="publiButton">Modificar</button>
+                    <button type="submit" class="btn btn-primary"  style="background-color:#043b83; border-color:#043b83;" name="publiButton">Modificar</button>
                 </div>
                 </form>
             </div>
@@ -167,7 +167,7 @@
                         
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary"  style="background-color:#ff8000; border-color:#ff8000;"  name="publiButton">Añadir</button>
+                    <button type="submit" class="btn btn-primary"  style="background-color:#043b83; border-color:#043b83;"  name="publiButton">Añadir</button>
                 </div>
                 </form>
             </div>

@@ -3,7 +3,7 @@
 class Inicio extends Controlador{
     public function __construct(){
         Sesion::iniciarSesion($this->datos);
-
+        $this->usuarioModelo = $this->modelo('UsuarioModelo');
         $this->pantallaModelo = $this->modelo('PantallaModelo');
         $this->publicacionModelo = $this->modelo('PublicacionModelo');
         $this->datos["rolesPermitidos"] = [1,3];
@@ -17,10 +17,17 @@ class Inicio extends Controlador{
    }
 
     public function index(){
+
+        $this->datos["rolesPermitidos"] = [1,3];
+
+        if (!tienePrivilegios($this->datos['usuarioSesion']->rol, $this->datos['rolesPermitidos'])) {
+            redireccionar("/inicio");
+          
+        }
+
         if ($_SERVER['REQUEST_METHOD']=='POST') {
             $datos=$_POST;
-            
-            
+         
             if($_FILES['publiImg']){
             $foto = $_FILES['publiImg']['name'];
          

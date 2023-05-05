@@ -1,16 +1,14 @@
 <?php require_once RUTA_APP.'/vistas/inc/header.php';?>
 
-
-
-    <div class="container mt-2">
+<div class="container mt-2">
     <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="<?php echo RUTA_URL?>">Home</a></li>
-      <li id="lipan" class="breadcrumb-item active" aria-current="page">Publicaciones</li>
+      <li id="lipan" class="breadcrumb-item active" aria-current="page">Mis publicaciones</li>
     </ol>
   </nav>
-        <h2  class="text-center"><strong>Historico publicaciones <i class="bi bi-book"></i></strong> </h2>
-        
+  <?php if($datos['mispublicaciones']!=[]):?>  
+        <h2  class="text-center"><strong>Mis publicaciones <i class="bi bi-newspaper"></i></strong> </h2>
         <div class="row col-12">
   <div class="mb-3 d-grid gap-2 d-md-flex justify-content-md-end col-8">
    
@@ -46,8 +44,6 @@
                 <th scope="col">Fecha Creación</th>
                 <th scope="col" >Fecha Inicio</th>
                 <th scope="col" >Fecha Fin</th>
-                
-                <th scope="col">Usuario</th>
                 <th scope="col">Estado</th>
                 <th></th>
               
@@ -89,18 +85,20 @@
 
     
 
-
+    <?php else:?>
+    <h2>No tienes publicaciones todavía o estan pendientes de validación</h2>
+<?php endif?>
 </body>
 
 </html>
-<?php foreach ($datos["publicaciones"] as $pendientes): ?>
+<?php foreach ($datos["mispublicaciones"] as $pendientes): ?>
    
 
    <div class="modal fade" id="ver<?php echo $pendientes->idPublic?>">
    
        <div class="modal-dialog modal-dialog-centered modal-xl">
    
-           <div class="modal-content">
+           <div class="modal-content ">
    
            <!-- Modal Header -->
                <div class="modal-header">
@@ -112,6 +110,8 @@
    
              <!-- Modal Body -->
                <div class="modal-body ms-3">
+    Usuario o Contraseña incorrecto!!
+    </div>
                    <p><?php echo $pendientes->mensajePublic?></p><br>
                    <?php if($pendientes->archivo!=""):?>
                    <img src="<?php echo RUTA_URL?>../img/<?php echo $pendientes->archivo?>" width="200"><br>
@@ -122,7 +122,7 @@
                        </div><br><br>
                    <?php endif?>
                    <p class="mt-2">Fecha de creación: <?php echo $pendientes->fechaCreacion?></p>
-                   <p class="mt-2">Creada por: <?php echo $pendientes->nombreUser?></p>
+                  
                    <p class="mt-2"><?php foreach($datos['pantallas']as $pantallas):?>
                    <?php if($pantallas->idPublic==$pendientes->idPublic):?>
                    <?php echo "<i class='bi bi-display'></i> ".$pantallas->nombrePantalla?>
@@ -147,12 +147,89 @@
        </div>
    </div>
    <?php endforeach?>
-   <?php require_once RUTA_APP.'/vistas/inc/footer.php'?>
+   <?php foreach ($datos["mispublicaciones"] as $pendientes): ?>
+   
+
+   <div class="modal fade" id="rehacer<?php echo $pendientes->idPublic?>">
+   
+       <div class="modal-dialog modal-dialog-centered modal-xl">
+   
+           <div class="modal-content">
+   
+           <!-- Modal Header -->
+               <div class="modal-header">
+                   <h4 class="modal-title ms-3">Modificar publicación</h4> 
+                   <button type="button" class="btn-close me-4" data-bs-dismiss="modal"></button>
+               </div>
+   
+           
+   
+             <!-- Modal Body -->
+               <div class="modal-body">
+                <div class="alert alert-danger mt-2 justify-content-center" role="alert">
+                  Motivo de denegación: <strong><?php echo $pendientes->motivoDenegacion?></strong>
+                </div>
+                <div class="grupo" id="grupo__asunto">
+                <form method="POST">
+                        <label for="asunto" name="asunto" class="form-label mt-2">Titulo</label>
+                        <div class="grupo-input" id="input__asunto">
+                    <input type="text" class="form-control" id="asunto" name="titulo" required value="<?php echo $pendientes->tituloPublic?>">
+                            <i class="validacion-estado fas fa-times-circle"></i>
+                        </div>
+                       
+                    </div>
+                   
+                    <label for="mensaje" class="form-label">Mensaje</label>
+                    <textarea id=mensaje name="mensaje" class="form-control"cols="3" rows="3" maxlength="2300"><?php echo $pendientes->mensajePublic?></textarea>
+
+                    <div class="row mt-2">
+                        <p class="m-0 mb-2">Establece el rango de fechas en que tu mensaje sera público</p>
+                        <div id="grupo__fechaInicio" class="col">
+                            <label for="fechaInicio" class="form-label m-0">Fecha inicio</label>
+                            <div class="grupo-input" id="input_fechaInicio">
+                                <input id="dateA" type="date" onchange="selectDate();" class="form-control" name="fechaInicio" min="" value="<?php echo $pendientes->fechaInicio?>">
+                                <i class="validacion-estado fas fa-times-circle" style="right: 35px;"></i>
+                        </div>
+                           
+                        </div>
+
+                        <div id="grupo__fechaFin" class="col">
+                            <label for="fechaFin" class="form-label m-0">Fecha fin</label>
+                            <div class="grupo-input" id="input__fechaFin">
+                                <input id="dateB" type="date" onchange="selectDate();" class="form-control" name="fechaFin" min="" value="<?php echo $pendientes->fechaLimite?>">
+                                <i class="validacion-estado fas fa-times-circle" style="right: 35px;"></i>
+                        </div>
+                            
+                    </div>
+                </div>
+
+                 
+                    
+
+                    <input type="hidden" value="<?php  echo $pendientes->idPublic?>" name="idPublic">
+                </div>
+
+               <div class="modal-footer">
+                   
+   
+                   <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="modal">Cerrar</button>
+                   <button type="submit" class="btn btn-secondary btn-lg" style="background-color:#043b83;">Volver a validar</button>
+               </div> 
+               </form>
+         
+           
+   
+           </div>
+       </div>
+   </div>
+   </div>
+   <?php endforeach?>
+<?php require_once RUTA_APP.'/vistas/inc/footer.php'?>
 <script>
 
     //paginacion, creado de tabla//
 
-            const datosTabla=<?php echo json_encode($datos['publicaciones'])?>;
+            const datosTabla=<?php echo json_encode($datos['mispublicaciones'])?>;
             let aprobada="";
            
             const ordenT=datosTabla.sort((a,b) => a.NombreRol > b.NombreRol);
@@ -205,15 +282,16 @@
                     
                         if(datosTabla[i].validada=="1"){
                             validada="APROBADA"
+                            disabled="style='visibility:hidden;'"+"disabled"
                             
                         }else{
                             validada="DENEGADA"
+                            disabled=""
                         }
-                      
-                        listing_table.innerHTML += '<td>'+ datosTabla[i].tituloPublic +'</td><td>'+ datosTabla[i].fechaCreacion +'</td><td>'+ datosTabla[i].fechaInicio +'</td><td>'+ datosTabla[i].fechaLimite +'</td><td>'+ datosTabla[i].nombreUser +'</td><td class="valor">'+ validada +'</td><td><a class="btn btn-outline-success btn-sm"  data-bs-toggle="modal" data-bs-target="#ver'+datosTabla[i].idPublic+'""'
-                        + '"><i class="bi bi-eye"></i></a> <a class="btn btn-outline-danger btn-sm" onclick="confirmar(event)" href="<?php echo RUTA_URL?>/publicacion/borrar_publicacion/' 
-                        + datosTabla[i].idPublic + '"><i class="bi-trash" ></i></a></td></tr></tbody></table>' ;
+                        listing_table.innerHTML += '<td>'+ datosTabla[i].tituloPublic +'</td><td>'+ datosTabla[i].fechaCreacion +'</td><td>'+ datosTabla[i].fechaInicio +'</td><td>'+ datosTabla[i].fechaLimite +'</td><td class="valor">'+ validada +'</td><td><a class="btn btn-outline-success btn-sm"  data-bs-toggle="modal" data-bs-target="#ver'+datosTabla[i].idPublic+'""'
+                        + '"><i class="bi bi-eye"></i></a> <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" title="rehacer publicacion" data-bs-target="#rehacer'+datosTabla[i].idPublic+'"'+disabled+'><i class="bi bi-arrow-clockwise" ></i></button></td></tr></tbody></table>' ;
                         
+                     
                         let td = document.getElementsByClassName('valor');
 
                             for(let i = 0; i < td.length; i++){
@@ -236,16 +314,19 @@
                     }
                 }else{
                     var validada="";
+                    let disabled="";
                     for (var i = (page-1) * obj_per_page; i < (page * obj_per_page); i++) {
                         if(datosTabla[i].validada=="1"){
                             validada="APROBADA"
+                            disabled="style='visibility:hidden;'"+"disabled"
                             
                         }else{
                             validada="DENEGADA"
+                            disabled=""
                         }
-                        listing_table.innerHTML += '<td>'+ datosTabla[i].tituloPublic +'</td><td>'+ datosTabla[i].fechaCreacion +'</td><td>'+ datosTabla[i].fechaInicio +'</td><td>'+ datosTabla[i].fechaLimite +'</td><td>'+ datosTabla[i].nombreUser +'</td><td class="valor">'+ validada +'</td><td><a class="btn btn-outline-success btn-sm"  data-bs-toggle="modal" data-bs-target="#ver'+datosTabla[i].idPublic+'""'
-                        + '"><i class="bi bi-eye"></i></a> <a class="btn btn-outline-danger btn-sm" onclick="confirmar(event)" href="<?php echo RUTA_URL?>/publicacion/borrar_publicacion/' 
-                        + datosTabla[i].idPublic + '"><i class="bi-trash" ></i></a></td></tr></tbody></table>' ;
+
+                        listing_table.innerHTML += '<td>'+ datosTabla[i].tituloPublic +'</td><td>'+ datosTabla[i].fechaCreacion +'</td><td>'+ datosTabla[i].fechaInicio +'</td><td>'+ datosTabla[i].fechaLimite +'</td><td class="valor">'+ validada +'</td><td><a class="btn btn-outline-success btn-sm"  data-bs-toggle="modal" data-bs-target="#ver'+datosTabla[i].idPublic+'""'
+                        + '"><i class="bi bi-eye"></i></a> <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" title="rehacer publicacion" data-bs-target="#rehacer'+datosTabla[i].idPublic+'"'+disabled+'><i class="bi bi-arrow-clockwise" ></i></button></td></tr></tbody></table>' ;
                         
                      
                             let td = document.getElementsByClassName('valor');
@@ -318,7 +399,7 @@
             e.preventDefault();
         }  
     }
-    const movimiento=<?php echo json_encode($datos['publicaciones'])?>;
+    const movimiento=<?php echo json_encode($datos['mispublicaciones'])?>;
   let t = document.getElementById("tipomov");
   t.addEventListener("change", function() {
   console.log(t.value);
@@ -356,11 +437,7 @@
       td.appendChild(tdText);
       tr.appendChild(td);
 
-      td = document.createElement("td");
-      tdText = document.createTextNode(e.nombreUser);
-      td.appendChild(tdText);
-      tr.appendChild(td);
-
+  
       td = document.createElement("td");
      
       if (e.validada==1) {
@@ -454,10 +531,7 @@
       td.appendChild(tdText);
       tr.appendChild(td);
 
-      td = document.createElement("td");
-      tdText = document.createTextNode(e.nombreUser);
-      td.appendChild(tdText);
-      tr.appendChild(td);
+      
 
       td = document.createElement("td");
      
@@ -550,10 +624,7 @@
      td.appendChild(tdText);
      tr.appendChild(td);
 
-     td = document.createElement("td");
-     tdText = document.createTextNode(e.nombreUser);
-     td.appendChild(tdText);
-     tr.appendChild(td);
+    
 
      td = document.createElement("td");
     
@@ -615,4 +686,3 @@
 
   });   
 </script>
-<!-- Modal -->

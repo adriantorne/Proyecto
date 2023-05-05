@@ -14,7 +14,7 @@
       </div>
   </div>
 
-<a class="btn btn-primary mt-3"   data-bs-toggle="modal" data-bs-target="#ubicacion" style="background-color:#ff8000; border-color:#ff8000;" >+ Añadir Ubicacion</a>
+<a class="btn btn-primary mt-3"   data-bs-toggle="modal" data-bs-target="#ubicacion" style="background-color:#043b83; border-color:#043b83;" >+ Añadir Ubicacion</a>
 <form class="d-flex mt-3" role="search">
       <input class="form-control me-2" type="search" placeholder="Buscar ubicacion" id="buscador" aria-label="Search">
       <button class="btn btn-outline-success" type="submit" onclick="return buscarUbi()" ><i class="bi bi-search"></i></button>
@@ -85,7 +85,7 @@
     
             <table class="table table-hover shadow" >
         <thead>
-            <tr style="background-color:#7c7c74;" class="text-light">
+            <tr style="background-color:#043b83;" class="text-light">
         
                 <th scope="col">Nombre</th>
                 <th scope="col">MAC</th>
@@ -169,7 +169,7 @@
                         
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary"  style="background-color:#ff8000; border-color:#ff8000;" name="publiButton">Añadir</button>
+                    <button type="submit" class="btn btn-primary"  style="background-color:#043b83; border-color:#043b83;" name="publiButton">Añadir</button>
                 </div>
                 </form>
             </div>

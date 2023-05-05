@@ -11,7 +11,7 @@
            
             $this->db->query("SELECT * 
                                     FROM usuario 
-                                    WHERE nombreUser=:user and claveUser=sha2(:password,256)");
+                                    WHERE nombreUser=:user and claveUser=sha2(:password,256) and estado=1");
             $this->db->bind(':user',$datos['usuario']);
             $this->db->bind(':password',$datos['pass']);
             
@@ -20,7 +20,7 @@
 
         public function verificarCorreo($email){
 
-            $this->db->query("SELECT Correo FROM Persona WHERE Correo = :user_email");
+            $this->db->query("SELECT email FROM usuario WHERE email = :user_email");
             $this->db->bind(':user_email',$email);
             return $this->db->registros();
             }

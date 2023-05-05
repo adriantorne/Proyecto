@@ -3,7 +3,7 @@
 class Login extends Controlador{
     public function __construct(){
         $this->loginModelo=$this->modelo("LoginModelo");
-        
+        $this->usuarioModelo=$this->modelo("UsuarioModelo");
     }
 
     public function index($error=''){
