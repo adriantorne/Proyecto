@@ -10,7 +10,7 @@
   <?php if($datos['mispublicaciones']!=[]):?>  
         <h2  class="text-center"><strong>Mis publicaciones <i class="bi bi-newspaper"></i></strong> </h2>
         <div class="row col-12">
-  <div class="mb-3 d-grid gap-2 d-md-flex justify-content-md-end col-8">
+  <div class="mb-2 d-grid gap-2 d-md-flex justify-content-md-end col-8">
    
      
       <select name="tipomov" id="tipomov" class="form-select">
@@ -18,6 +18,7 @@
         <option value="1">Todos</option>
         <option value="2">Aceptadas</option>
         <option value="3">Denegadas</option>
+        <option value="4">Pendientes</option>
       </select>
   </div>         
 
@@ -63,7 +64,7 @@
 
 
         <nav aria-label=" Page navigation example ">
-  <ul class="pagination d-flex justify-content-center">
+  <ul class="pagination d-flex justify-content-center ">
     <li class="shadow page-item">
       <a class="page-link" href="#" aria-label="Previous" onclick="prevPage()">
         <span aria-hidden="true">&laquo;</span>
@@ -77,7 +78,7 @@
     </li>
   </ul>
     </nav> 
-    <div id="normal">
+    <div id="normal ">
 
     <span id="page"></span>
     
@@ -110,8 +111,7 @@
    
              <!-- Modal Body -->
                <div class="modal-body ms-3">
-    Usuario o Contraseña incorrecto!!
-    </div>
+
                    <p><?php echo $pendientes->mensajePublic?></p><br>
                    <?php if($pendientes->archivo!=""):?>
                    <img src="<?php echo RUTA_URL?>../img/<?php echo $pendientes->archivo?>" width="200"><br>
@@ -142,7 +142,6 @@
                </form>
          
            
-   
            </div>
        </div>
    </div>
@@ -237,7 +236,7 @@
             //console.log(ordenT);
             document.getElementById("page").style="display:none";
             var current_page = 1;
-            var obj_per_page = 8;
+            var obj_per_page = 6;
 
             function totNumPages(){
                 
@@ -284,9 +283,12 @@
                             validada="APROBADA"
                             disabled="style='visibility:hidden;'"+"disabled"
                             
-                        }else{
+                        }else if(datosTabla[i].validada=="-1"){
                             validada="DENEGADA"
                             disabled=""
+                        }else{
+                          validada="PENDIENTE"
+                          disabled="style='visibility:hidden;'"+"disabled"
                         }
                         listing_table.innerHTML += '<td>'+ datosTabla[i].tituloPublic +'</td><td>'+ datosTabla[i].fechaCreacion +'</td><td>'+ datosTabla[i].fechaInicio +'</td><td>'+ datosTabla[i].fechaLimite +'</td><td class="valor">'+ validada +'</td><td><a class="btn btn-outline-success btn-sm"  data-bs-toggle="modal" data-bs-target="#ver'+datosTabla[i].idPublic+'""'
                         + '"><i class="bi bi-eye"></i></a> <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" title="rehacer publicacion" data-bs-target="#rehacer'+datosTabla[i].idPublic+'"'+disabled+'><i class="bi bi-arrow-clockwise" ></i></button></td></tr></tbody></table>' ;
@@ -300,15 +302,19 @@
                                 
                                 //console.log(td[i]);
                                 
-                            if(td[i].innerHTML == 'DENEGADA'){
+                                   
+                                if(td[i].innerHTML == 'DENEGADA'){
                                 
-                                    td[i].style.color = 'red';
-                                    td[i].setAttribute('class','fw-bold')
-                                    
-                                }else{
-                                    td[i].style.color = 'green';
-                                    td[i].setAttribute('class','fw-bold')
-                                }
+                                td[i].style.color = 'red';
+                                td[i].setAttribute('class','fw-bold')
+                                
+                            }else if(td[i].innerHTML == 'APROBADA'){
+                                td[i].style.color = 'green';
+                                td[i].setAttribute('class','fw-bold')
+                            }else{
+                              td[i].style.color = 'grey';
+                                td[i].setAttribute('class','fw-bold')
+                            }
 
                             }
                     }
@@ -316,15 +322,17 @@
                     var validada="";
                     let disabled="";
                     for (var i = (page-1) * obj_per_page; i < (page * obj_per_page); i++) {
-                        if(datosTabla[i].validada=="1"){
+                      if(datosTabla[i].validada=="1"){
                             validada="APROBADA"
                             disabled="style='visibility:hidden;'"+"disabled"
                             
-                        }else{
+                        }else if(datosTabla[i].validada=="-1"){
                             validada="DENEGADA"
                             disabled=""
+                        }else{
+                          validada="PENDIENTE"
+                          disabled="style='visibility:hidden;'"+"disabled"
                         }
-
                         listing_table.innerHTML += '<td>'+ datosTabla[i].tituloPublic +'</td><td>'+ datosTabla[i].fechaCreacion +'</td><td>'+ datosTabla[i].fechaInicio +'</td><td>'+ datosTabla[i].fechaLimite +'</td><td class="valor">'+ validada +'</td><td><a class="btn btn-outline-success btn-sm"  data-bs-toggle="modal" data-bs-target="#ver'+datosTabla[i].idPublic+'""'
                         + '"><i class="bi bi-eye"></i></a> <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" title="rehacer publicacion" data-bs-target="#rehacer'+datosTabla[i].idPublic+'"'+disabled+'><i class="bi bi-arrow-clockwise" ></i></button></td></tr></tbody></table>' ;
                         
@@ -342,8 +350,11 @@
                                     td[i].style.color = 'red';
                                     td[i].setAttribute('class','fw-bold')
                                     
-                                }else{
+                                }else if(td[i].innerHTML == 'APROBADA'){
                                     td[i].style.color = 'green';
+                                    td[i].setAttribute('class','fw-bold')
+                                }else{
+                                  td[i].style.color = 'grey';
                                     td[i].setAttribute('class','fw-bold')
                                 }
 
@@ -441,16 +452,21 @@
       td = document.createElement("td");
      
       if (e.validada==1) {
-        tdText = document.createTextNode("APORBADA");
-        td.appendChild(tdText);
-        td.style.color="green";
-        td.setAttribute('class','fw-bold')
-      }else{
-        tdText = document.createTextNode("DENEGADA");
-        td.appendChild(tdText);
-        td.style.color="red";
-        td.setAttribute('class','fw-bold')
-      };
+       tdText = document.createTextNode("APORBADA");
+       td.appendChild(tdText);
+       td.style.color="green";
+       td.setAttribute('class','fw-bold')
+     }else if(e.validada==-1){
+       tdText = document.createTextNode("DENEGADA");
+       td.appendChild(tdText);
+       td.style.color="red";
+       td.setAttribute('class','fw-bold')
+     }else{
+      tdText = document.createTextNode("PENDIENTE");
+       td.appendChild(tdText);
+       td.style.color="grey";
+       td.setAttribute('class','fw-bold')
+     };
       
     //   var i = document.createElement("i");
     //         i.className="bi-eye";
@@ -536,16 +552,21 @@
       td = document.createElement("td");
      
       if (e.validada==1) {
-        tdText = document.createTextNode("APORBADA");
-        td.appendChild(tdText);
-        td.style.color="green";
-        td.setAttribute('class','fw-bold')
-      }else{
-        tdText = document.createTextNode("DENEGADA");
-        td.appendChild(tdText);
-        td.style.color="red";
-        td.setAttribute('class','fw-bold')
-      };
+       tdText = document.createTextNode("APORBADA");
+       td.appendChild(tdText);
+       td.style.color="green";
+       td.setAttribute('class','fw-bold')
+     }else if(e.validada==-1){
+       tdText = document.createTextNode("DENEGADA");
+       td.appendChild(tdText);
+       td.style.color="red";
+       td.setAttribute('class','fw-bold')
+     }else{
+      tdText = document.createTextNode("PENDIENTE");
+       td.appendChild(tdText);
+       td.style.color="grey";
+       td.setAttribute('class','fw-bold')
+     };
       
     //   var i = document.createElement("i");
     //         i.className="bi-eye";
@@ -633,10 +654,112 @@
        td.appendChild(tdText);
        td.style.color="green";
        td.setAttribute('class','fw-bold')
-     }else{
+     }else if(e.validada==-1){
        tdText = document.createTextNode("DENEGADA");
        td.appendChild(tdText);
        td.style.color="red";
+       td.setAttribute('class','fw-bold')
+     }else{
+      tdText = document.createTextNode("PENDIENTE");
+       td.appendChild(tdText);
+       td.style.color="grey";
+       td.setAttribute('class','fw-bold')
+     };
+     
+   //   var i = document.createElement("i");
+   //         i.className="bi-eye";
+
+   //         var a1=document.createElement("a");
+   //         a1.className="btn btn-outline-danger btn-sm";
+   //         a1.onclick=function(){
+   //         confirmar(event);
+   //         }
+   //         a1.setAttribute("href", "<?php echo RUTA_URL?>/usuario/borrar_usuario/"+e.idPublic+"");
+   //         var txt1= document.createTextNode(" ");
+   //         var i1 = document.createElement("i");
+   //         i1.className="bi-trash";
+
+   //         a1.appendChild(td);
+
+     tr.appendChild(td);
+
+     td = document.createElement("td");
+     a1=document.createElement("a");
+    
+           a1.className="btn btn-outline-danger btn-sm";
+           a1.onclick=function(){
+           confirmar(event);
+           }
+           a1.setAttribute("href", "<?php echo RUTA_URL?>/publicacion/borrar_publicacion/"+e.idPublic+"");
+           var i1 = document.createElement("i");
+           i1.className="bi-trash";
+           var a=document.createElement("a");
+           a.className="btn btn-outline-success btn-sm";
+           a.setAttribute("data-bs-toggle", "modal");
+            a.setAttribute("data-bs-target","#ver"+e.idPublic+"");
+           var i = document.createElement("i");
+           i.className="bi-eye";
+           a.appendChild(i);
+           td.appendChild(a);
+           a1.appendChild(i1);
+           td.appendChild(a1);
+           tr.appendChild(td);
+     tbody.appendChild(tr);
+
+         }
+   });
+ }
+ if (t.value==4) {
+   
+   const tbody = document.getElementById("usuarios");
+   
+
+
+   //recorremos el array con todos los datos y llenamos la tabla
+    movimiento.forEach((e) => {
+
+    // tbody.appendChild(tr);
+     if(e.validada==0){
+     tr = document.createElement("tr");
+
+     td = document.createElement("td");
+     tdText = document.createTextNode(e.tituloPublic);
+     td.appendChild(tdText);
+     tr.appendChild(td);
+
+     td = document.createElement("td");
+     tdText = document.createTextNode(e.fechaCreacion);
+     td.appendChild(tdText);
+     tr.appendChild(td);
+
+     td = document.createElement("td");
+     tdText = document.createTextNode(e.fechaInicio);
+     td.appendChild(tdText);
+     tr.appendChild(td);
+
+     td = document.createElement("td");
+     tdText = document.createTextNode(e.fechaLimite);
+     td.appendChild(tdText);
+     tr.appendChild(td);
+
+    
+
+     td = document.createElement("td");
+    
+     if (e.validada==1) {
+       tdText = document.createTextNode("APORBADA");
+       td.appendChild(tdText);
+       td.style.color="green";
+       td.setAttribute('class','fw-bold')
+     }else if(e.validada==-1){
+       tdText = document.createTextNode("DENEGADA");
+       td.appendChild(tdText);
+       td.style.color="red";
+       td.setAttribute('class','fw-bold')
+     }else{
+      tdText = document.createTextNode("PENDIENTE");
+       td.appendChild(tdText);
+       td.style.color="grey";
        td.setAttribute('class','fw-bold')
      };
      

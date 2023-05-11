@@ -160,7 +160,7 @@
             //console.log(ordenT);
             document.getElementById("page").style="display:none";
             var current_page = 1;
-            var obj_per_page = 8;
+            var obj_per_page = 6;
 
             function totNumPages(){
                 

@@ -96,6 +96,7 @@
         </thead>
         <?php foreach($datos['pantallas']as $pantalla) :?>
               <?php if($pantalla->idUbc==$ubicacion->idUbc):?>
+                <?php $disabled="disabled"?>
         <tbody  id="usuarios">
         
             <tr>
@@ -227,17 +228,16 @@ function change(page){
 
     if (page * obj_per_page>datosTabla.length) {
         for (var i = (page-1) * obj_per_page; i < datosTabla.length; i++) {
-          listing_table.innerHTML += '<li class="shadow list-group-item mb-2"><img class="rounded" style="width:30px;" src="imagenes/ubicacion.png"> ' + datosTabla[i].nombreUbc
-            +'<div class="mt-1 mb-1"><a class="btn btn-outline-success btn-sm"  data-bs-toggle="modal" data-bs-target="#ver'+datosTabla[i].idUbc+'">'+" "+'<i class="bi bi-display"></i> <a class="btn btn-outline-danger btn-sm" onclick="confirmar(event)" href="<?php echo RUTA_URL?>/ubicacion/borrar_ubicacion/' 
-            + datosTabla[i].idUbc + '"><i class="bi-trash" ></i></a></div></li>' ;
-
+            listing_table.innerHTML += '<li class="shadow list-group-item mb-2"><img class="rounded" style="width:30px;" src="imagenes/ubicacion.png"> ' + datosTabla[i].nombreUbc
+            +'<div class="mt-1 mb-1"><a class="btn btn-outline-success btn-sm"  data-bs-toggle="modal" data-bs-target="#ver'+datosTabla[i].idUbc+'"><i class="bi bi-display"></i></a><button class="btn btn-outline-danger btn-sm" onclick="confirmar(event)" <?php echo $disabled?> href="<?php echo RUTA_URL?>/ubicacion/borrar_ubicacion/' 
+            + datosTabla[i].idUbc + '"><i class="bi-trash" ></i></button></div></li>' ;
         }
     }else{
         for (var i = (page-1) * obj_per_page; i < (page * obj_per_page); i++) {
 
           listing_table.innerHTML += '<li class="shadow list-group-item mb-2"><img class="rounded" style="width:30px;" src="imagenes/ubicacion.png"> ' + datosTabla[i].nombreUbc
-            +'<div class="mt-1 mb-1"><a class="btn btn-outline-success btn-sm"  data-bs-toggle="modal" data-bs-target="#ver'+datosTabla[i].idUbc+'"><i class="bi bi-display"></i><a class="btn btn-outline-danger btn-sm" onclick="confirmar(event)" href="<?php echo RUTA_URL?>/ubicacion/borrar_ubicacion/' 
-            + datosTabla[i].idUbc + '"><i class="bi-trash" ></i></a></div></li>' ;
+            +'<div class="mt-1 mb-1"><a class="btn btn-outline-success btn-sm"  data-bs-toggle="modal" data-bs-target="#ver'+datosTabla[i].idUbc+'"><i class="bi bi-display"></i></a><button class="btn btn-outline-danger btn-sm" onclick="confirmar(event)" <?php echo $disabled?> href="<?php echo RUTA_URL?>/ubicacion/borrar_ubicacion/' 
+            + datosTabla[i].idUbc + '"><i class="bi-trash" ></i></button></div></li>' ;
 
         }
     }

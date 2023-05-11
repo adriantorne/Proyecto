@@ -264,6 +264,7 @@
 
             <!-- Modal Body -->
             <div class="modal-body">
+                <?php if($datos['deshabilitados']!=[]):?>
             <table class="table table-hover shadow" >
         <thead>
             <tr style="background-color:#043b83;" class="text-light">
@@ -298,6 +299,9 @@
             </tr>
         </tbody>
         </table>
+        <?php else:?>
+            <h2>No hay usuarios deshabilitados</h2>
+        <?php endif?>
             </div>
             <div class="modal-footer">
             
@@ -434,7 +438,7 @@
             //console.log(ordenT);
             document.getElementById("page").style="display:none";
             var current_page = 1;
-            var obj_per_page = 4;
+            var obj_per_page = 3;
 
             function totNumPages(){
                 

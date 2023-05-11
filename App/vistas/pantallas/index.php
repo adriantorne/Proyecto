@@ -9,7 +9,10 @@
   </nav>
         <h2  class="text-center"><strong>Pantallas <i class="bi bi-display"></i></strong> </h2>
         <div class="row mb-3">
-        <div class="col-8">
+        <div class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-2">
+         <a class="btn btn-primary w-100" style="background-color:#043b83; border-color:#043b83; width:10%;" data-bs-toggle="modal" data-bs-target="#pantallas">+ Añadir Pantalla</a>
+         </div>
+        <div class="col-4">
             
              <form class="form-inline">
     
@@ -23,9 +26,7 @@
             </form>
     
          </div>
-         <div class="col-4">
-         <a class="btn btn-primary w-100" style="background-color:#043b83; border-color:#043b83; width:10%;" data-bs-toggle="modal" data-bs-target="#pantallas">+ Añadir Pantalla</a>
-         </div>
+       
 </div>
 
   <table class="table table-hover shadow" >
@@ -89,7 +90,7 @@
                     </div>
 
                     <label for="mensaje" class="form-label">Mac</label>
-                    <input type="text" class="form-control" id="asunto" name="mac" value="<?php echo $pantalla->MAC?>" required>
+                    <input type="text" class="form-control" id="asunto" name="mac" value="<?php echo $pantalla->MAC?>"  onkeyup="validarMac(this)" required>
                    
                    
                     <div class="grupo mb-3" id="grupo__asunto">
@@ -149,7 +150,7 @@
                     </div>
 
                     <label for="mensaje" class="form-label">Mac</label>
-                    <input type="text" class="form-control" id="asunto" name="mac" required>
+                    <input type="text" class="form-control" id="mac" name="mac"  onkeyup="validarMac(this)" required>
                     <select name="ubicacion" id="tipomov" class="form-select mt-3 mb-3">
                    
                             <option value="" selected disabled >Seleccione la ubicación</option>
@@ -203,5 +204,18 @@
 				tr[i].style.display = display;
 			}
 		}	
+    function validarMac(mac){
+        var regexp = /^(([A-Fa-f0-9]{2}[:]){5}[A-Fa-f0-9]{2}[,]?)+$/i;
+        var mac_address = mac.value;
+        console.log(mac_address);
+        if(regexp.test(mac_address)) {
+            mac.style = "border: 2px solid green";
+            return true;
+        } else {
+           
+            mac.style = "border: 2px solid red;";
+            return false;
+        }
+            }
 </script>
 

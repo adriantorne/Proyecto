@@ -22,6 +22,10 @@ class Perfil extends Controlador{
             redireccionar("/inicio");
           
         }
+        if ($this->datos['usuarioSesion']->idUser!=$idUser){
+            redireccionar("/inicio");
+          
+        }
         if ($_SERVER['REQUEST_METHOD']=='POST') {
             print_r($datos=$_POST);
             $this->datos["usuario"]=$this->perfilModelo->getUsuario($idUser);

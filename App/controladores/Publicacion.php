@@ -39,6 +39,10 @@ class Publicacion extends Controlador{
             redireccionar("/inicio");
           
         }
+        if ($this->datos['usuarioSesion']->idUser!=$idUser){
+            redireccionar("/inicio");
+          
+        }
          if ($_SERVER["REQUEST_METHOD"]=="POST") {
             $datos=$_POST;
             $idPublic=$_POST['idPublic'];

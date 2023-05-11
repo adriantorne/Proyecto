@@ -58,10 +58,15 @@
     function delPantalla($idPantalla){
 
 
-        $this->db->query("DELETE FROM pantalla where idPantalla=:idPantalla");
+        $this->db->query("DELETE FROM asignar where idPantalla=:idPantalla");
         $this->db->bind(':idPantalla', $idPantalla);
 
        
+
+        $this->db->execute();
+
+        $this->db->query("DELETE FROM pantalla where idPantalla=:idPantalla");
+        $this->db->bind(':idPantalla', $idPantalla);
 
         if ($this->db->execute()) {
             return true;

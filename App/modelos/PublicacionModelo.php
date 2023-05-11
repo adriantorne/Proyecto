@@ -172,7 +172,7 @@
                public function getMisPublicaciones($idUser){
                     $this->db->query("SELECT publicacion.*
                     FROM publicacion
-                    WHERE idUser = :idUser and (validada='1' or validada='-1') order by fechaCreacion desc");
+                    WHERE idUser = :idUser  order by fechaCreacion desc");
                     $this->db->bind(':idUser', $idUser);
                     return $this->db->registros();
                }
