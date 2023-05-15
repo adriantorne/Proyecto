@@ -24,7 +24,7 @@ class Inicio extends Controlador{
             redireccionar("/inicio");
           
         }
-
+       
         if ($_SERVER['REQUEST_METHOD']=='POST') {
             $datos=$_POST;
          
@@ -41,9 +41,9 @@ class Inicio extends Controlador{
             } else {
                 //If the image is correct in size and type
                 //Trying to upload to the server
-                if (move_uploaded_file($temp, "/wamp64/www/Proyecto/public/img/".$foto)) {
+                if (move_uploaded_file($temp, "img/".$foto)) {
                     //Change the permissions of the file to 777 to be able to modify it later
-                    chmod("/wamp64/www/Proyecto/public/img/".$foto, 0777);
+                    chmod("img/".$foto, 0777);
                 }
                
             }
