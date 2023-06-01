@@ -24,7 +24,7 @@ class Inicio extends Controlador
         $this->datos["rolesPermitidos"] = [1, 3];
 
         if (!tienePrivilegios($this->datos['usuarioSesion']->rol, $this->datos['rolesPermitidos'])) {
-            redireccionar("/inicio");
+            redireccionar("/inicio_no/");
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
