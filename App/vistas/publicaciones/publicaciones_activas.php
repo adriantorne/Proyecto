@@ -65,7 +65,7 @@
                         </td>
                         <td>
                             <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#ver<?php echo $activas->idPublic ?>"><i class="bi bi-eye"></i></button>
-                            <a class="btn btn-outline-danger" onclick="confirmar(event)"><i class="bi bi-x-circle"></i></i></a>
+                            <a class="btn btn-outline-danger" onclick="confirmar(event)" href="<?php echo RUTA_URL?>/publicacion/desactivar_publicacion/<?php echo $activas->idPublic ?>"><i class="bi bi-x-circle"></i></i></a>
 
                         </td>
                     </tr>

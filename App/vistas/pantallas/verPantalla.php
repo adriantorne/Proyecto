@@ -48,7 +48,7 @@
                     <h2 class="text-center"><?php echo $publicacion->tituloPublic ?></h2>
                     <p class="text-center"><?php echo $publicacion->mensajePublic ?></p>
                   </Div>
-                  <img src="../img/<?php echo $publicacion->archivo ?>" class="d-block w-100 p-5" style="max-height:560px;" width="20" alt="...">
+                  <img src="<?php echo RUTA_URL ?>/img/<?php echo $publicacion->archivo ?>" class="d-block w-100 p-5" style="max-height:560px;" width="20" alt="...">
 
                 </div>
               <?php endif ?>

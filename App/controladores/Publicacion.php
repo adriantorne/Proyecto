@@ -163,4 +163,19 @@ class Publicacion extends Controlador
             echo "se ha producido un error!!!!";
         }
     }
+    public function desactivar_publicacion($idPublic)
+    {
+        $this->datos["rolesPermitidos"] = [3];
+
+        if (!tienePrivilegios($this->datos['usuarioSesion']->rol, $this->datos['rolesPermitidos'])) {
+            echo "No tienes privilegios!!!";
+            exit();
+        }
+
+        if ($this->publicacionModelo->desactivarPublicacion($idPublic)) {
+            redireccionar("/publicacion/publicaciones_activas");
+        } else {
+            echo "se ha producido un error!!!!";
+        }
+    }
 }

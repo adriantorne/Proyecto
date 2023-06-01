@@ -44,7 +44,7 @@ class PublicacionModelo
     {
         $this->db->query("SELECT publicacion.*, usuario.nombreUser, pantalla.nombrePantalla
         FROM publicacion, usuario, pantalla, asignar
-        WHERE publicacion.idUser = usuario.idUser and validada='1' and publicacion.idPublic = asignar.idPublic and asignar.idPantalla = pantalla.idPantalla and publicacion.fechaInicio<=:fechahoy and publicacion.fechaLimite>=:fechahoy group by idPublic order by fechaCreacion desc");
+        WHERE publicacion.idUser = usuario.idUser and validada='1' and publicacion.idPublic = asignar.idPublic and asignar.idPantalla = pantalla.idPantalla and publicacion.fechaInicio<=:fechahoy and publicacion.fechaLimite>=:fechahoy and publicacion.estado = '1' group by idPublic order by fechaCreacion desc");
 
         $this->db->bind(':fechahoy', $date);
         return $this->db->registros();
@@ -53,7 +53,7 @@ class PublicacionModelo
     {
         $this->db->query("SELECT publicacion.idPublic, pantalla.nombrePantalla, publicacion.tituloPublic,publicacion.mensajePublic,publicacion.archivo FROM publicacion 
             left JOIN asignar ON asignar.idPublic=publicacion.idPublic
-            left JOIN pantalla ON pantalla.idPantalla= asignar.idPantalla where pantalla.MAC=:mac and publicacion.fechaInicio<=:fechahoy and publicacion.fechaLimite>=:fechahoy and validada='1'");
+            left JOIN pantalla ON pantalla.idPantalla= asignar.idPantalla where pantalla.MAC=:mac and publicacion.fechaInicio<=:fechahoy and publicacion.fechaLimite>=:fechahoy and validada='1' and estado='1'");
 
         $this->db->bind(':mac', $mac);
         $this->db->bind(':fechahoy', $date);
@@ -63,7 +63,7 @@ class PublicacionModelo
     {
         $this->db->query("SELECT publicacion.idPublic, pantalla.nombrePantalla, publicacion.tituloPublic,publicacion.mensajePublic,publicacion.archivo FROM publicacion 
         left JOIN asignar ON asignar.idPublic=publicacion.idPublic
-        left JOIN pantalla ON pantalla.idPantalla= asignar.idPantalla where pantalla.idPantalla=:idPantalla and publicacion.fechaInicio<=:fechahoy and publicacion.fechaLimite>=:fechahoy and validada='1'");
+        left JOIN pantalla ON pantalla.idPantalla= asignar.idPantalla where pantalla.idPantalla=:idPantalla and publicacion.fechaInicio<=:fechahoy and publicacion.fechaLimite>=:fechahoy and validada='1' and estado='1'");
 
         $this->db->bind(':idPantalla', $idPantalla);
         $this->db->bind(':fechahoy', $date);
@@ -99,8 +99,8 @@ class PublicacionModelo
 
         if ($foto != "NULL") {
 
-            $this->db->query("INSERT INTO publicacion(fechaCreacion, tituloPublic, mensajePublic, archivo,fechaInicio,fechaLimite,idUser,validada)
-                 VALUES(NOW(), :titulo, :mensaje, :imagen, :fechaInicio, :fechaFin,:usuario,'0')");
+            $this->db->query("INSERT INTO publicacion(fechaCreacion, tituloPublic, mensajePublic, archivo,fechaInicio,fechaLimite,idUser,validada,estado)
+                 VALUES(NOW(), :titulo, :mensaje, :imagen, :fechaInicio, :fechaFin,:usuario,'0','1')");
             $this->db->bind(':titulo', trim($datos['titulo']));
             $this->db->bind(':mensaje', trim($datos['mensaje']));
             $this->db->bind(':imagen', $foto);
@@ -123,8 +123,8 @@ class PublicacionModelo
 
             return true;
         } else {
-            $this->db->query("INSERT INTO publicacion(fechaCreacion, tituloPublic, mensajePublic, archivo,fechaInicio,fechaLimite,idUser,validada)
-                VALUES(NOW(), :titulo, :mensaje, NULL, :fechaInicio, :fechaFin,:usuario,'0')");
+            $this->db->query("INSERT INTO publicacion(fechaCreacion, tituloPublic, mensajePublic, archivo,fechaInicio,fechaLimite,idUser,validada,estado)
+                VALUES(NOW(), :titulo, :mensaje, NULL, :fechaInicio, :fechaFin,:usuario,'0','1')");
             $this->db->bind(':titulo', trim($datos['titulo']));
             $this->db->bind(':mensaje', trim($datos['mensaje']));
 
@@ -217,6 +217,23 @@ class PublicacionModelo
         $this->db->bind(':fechaInicio', trim($datos['fechaInicio']));
         $this->db->bind(':fechaFin', trim($datos['fechaFin']));
         $this->db->bind(':idPublic', $datos['idPublic']);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function desactivarPublicacion($idPublic)
+    {
+        
+        $this->db->query("UPDATE publicacion set estado='0' 
+                     where idPublic = :idPublic");
+
+
+        $this->db->bind(':idPublic',$idPublic);
+        
 
         if ($this->db->execute()) {
             return true;
