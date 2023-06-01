@@ -71,8 +71,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
 
-                <!-- CONTENIDO DEL MODAL PUBLICACIÓN -->
-                <form id="formPubli" method="post" enctype="multipart/form-data">
+                
+                <form id="formUsuario" method="post" enctype="multipart/form-data">
                     <div class="modal-body">
 
 
@@ -104,23 +104,23 @@
                         <div class="row">
                             <div class="mb-3 col-6">
                                 <label for="email_us" class="form-label">Email <i class="bi bi-envelope"></i></label>
-                                <input type="email" class="form-control" id="email_us" name="email" required>
+                                <input type="email" class="form-control" id="email" name="email" onkeyup="validarEmail()" required>
                             </div>
                             <div class="mb-3 col-6">
                                 <label for="telefono" class="form-label">Telefono<i class="bi bi-phone"></i></label>
-                                <input type="text" class="form-control" id="telefono" name="telefono" required>
+                                <input type="text" class="form-control" id="telefono" name="telefono"  onkeyup="validarTelefono()"  required>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="mb-3 col-6 ">
                                 <label for="apellido_us" class="form-label">Nombre usuario <i class="bi bi-person-vcard"></i></label>
-                                <input type="text" class="form-control" id="apellido_us" name="nombreUser" required>
+                                <input type="text" class="form-control" id="nombreUser" name="nombreUser" required>
                             </div>
 
                             <div class="mb-3 col-6">
                                 <label for="apellido_us" class="form-label">Clave <i class="bi bi-incognito"></i></label>
-                                <input type="password" class="form-control" id="apellido_us" name="claveUser" required>
+                                <input type="password" class="form-control" id="claveUser" name="claveUser" required>
                             </div>
                         </div>
                         <div class="mb-3">
@@ -163,7 +163,7 @@
 
                 <!-- Modal Body -->
                 <div class="modal-body" id="modalBody">
-                    <form id="formPubli" method="post" enctype="multipart/form-data">
+                    <form id="formEditUsuario" method="post" enctype="multipart/form-data">
                         <div class="modal-body">
 
 
@@ -196,11 +196,11 @@
                             <div class="row">
                                 <div class="mb-3 col-6">
                                     <label for="email_us" class="form-label">Email <i class="bi bi-envelope"></i></label>
-                                    <input type="email" class="form-control" id="email_us" name="email" value="<?php echo $usuario->email ?>" required>
+                                    <input type="email" class="form-control" id="email2" name="email" value="<?php echo $usuario->email ?>" onkeyup="validarEmail2()" required>
                                 </div>
                                 <div class="mb-3 col-6">
                                     <label for="telefono" class="form-label">Telefono <i class="bi bi-phone"></i></label>
-                                    <input type="text" class="form-control" id="telefono" name="telefono" value="<?php echo $usuario->telefono ?>" required>
+                                    <input type="text" class="form-control" id="telefono2" name="telefono" value="<?php echo $usuario->telefono ?>"  onkeyup="validarTelefono2()" required>
                                 </div>
                             </div>
 
@@ -487,7 +487,7 @@
                     rol = "Publicador"
                 }
 
-                listing_table.innerHTML += '<li class="shadow list-group-item mb-2"><img class="rounded" style="width:20px;" src="imagenes/456212.png"> ' + datosTabla[i].nombreUser + '-' + datosTabla[i].nombreRol +
+                listing_table.innerHTML += '<li class="shadow list-group-item mb-2"><img class="rounded" style="width:20px;" src="<?php echo RUTA_URL?>/imagenes/456212.png"> ' + datosTabla[i].nombreUser + '-' + datosTabla[i].nombreRol +
                     '<div class="mt-1 mb-1"><a class="btn btn-outline-success btn-sm"  data-bs-toggle="modal" data-bs-target="#ver' + datosTabla[i].idUser + '"><i class="bi bi-eye"></i> <a class="btn btn-outline-danger btn-sm" onclick="confirmar(event)" href="<?php echo RUTA_URL ?>/usuario/deshabilitar_usuario/' +
                     datosTabla[i].idUser + '"><i class="bi bi-person-dash"></i></i></a><a class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#verPublic' + datosTabla[i].idUser + '"><i class="bi bi-book"></i></div></li>';
 
@@ -500,7 +500,7 @@
             for (var i = (page - 1) * obj_per_page; i < (page * obj_per_page); i++) {
 
 
-                listing_table.innerHTML += '<li class="shadow list-group-item mb-2"><img class="rounded" style="width:20px;" src="imagenes/456212.png"> ' + datosTabla[i].nombreUser + '-' + datosTabla[i].nombreRol +
+                listing_table.innerHTML += '<li class="shadow list-group-item mb-2"><img class="rounded" style="width:20px;" src="<?php echo RUTA_URL?>/imagenes/456212.png"> ' + datosTabla[i].nombreUser + '-' + datosTabla[i].nombreRol +
                     '<div class="mt-1 mb-1"><a class="btn btn-outline-success btn-sm"  data-bs-toggle="modal" data-bs-target="#ver' + datosTabla[i].idUser + '"><i class="bi bi-eye"></i> <a class="btn btn-outline-danger btn-sm" onclick="confirmar(event)" href="<?php echo RUTA_URL ?>/usuario/deshabilitar_usuario/' +
                     datosTabla[i].idUser + '"><i class="bi bi-person-dash"></i></i></a><a class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#verPublic' + datosTabla[i].idUser + '"><i class="bi bi-book"></i></div></li>';
 
@@ -554,7 +554,7 @@
             li.className = "shadow list-group-item mb-2";
 
             var img = document.createElement('img');
-            img.src = "imagenes/456212.png"
+            img.src = "<?php echo RUTA_URL?>/imagenes/456212.png"
             img.className = "rounded";
             img.style = "width:20px;";
 
@@ -730,4 +730,68 @@
             tipo.type = "password";
         }
     }
+    var formulario = document.getElementById('formUsuario');
+  var emailInput = document.getElementById('email');
+  var telefonoInput = document.getElementById('telefono');
+
+  function validarEmail() {
+    var email = emailInput.value;
+    var regex = /^\S+@\S+\.\S+$/;
+
+    if (!regex.test(email)) {
+      emailInput.setCustomValidity('El correo electrónico no es válido');
+    } else {
+      emailInput.setCustomValidity('');
+    }
+  }
+
+  function validarTelefono() {
+    var telefono = telefonoInput.value;
+    var regex = /^[0-9]{10}$/;
+
+    if (!regex.test(telefono)) {
+      telefonoInput.setCustomValidity('El número de teléfono no es válido');
+    } else {
+      telefonoInput.setCustomValidity('');
+    }
+  }
+
+  formulario.addEventListener('submit', function(event) {
+    if (!formulario.checkValidity()) {
+      event.preventDefault();
+    }
+  });
+ 
+  var formulario2 = document.getElementById('formEditUsuario');
+  var emailInput2 = document.getElementById('email2');
+  var telefonoInput2 = document.getElementById('telefono2');
+
+  function validarEmail2() {
+    var email = emailInput2.value;
+    var regex = /^\S+@\S+\.\S+$/;
+
+    if (!regex.test(email)) {
+      emailInput2.setCustomValidity('El correo electrónico no es válido');
+    } else {
+      emailInput2.setCustomValidity('');
+    }
+  }
+
+  function validarTelefono2() {
+    var telefono = telefonoInput2.value;
+    var regex = /^[0-9]{10}$/;
+
+    if (!regex.test(telefono)) {
+      telefonoInput2.setCustomValidity('El número de teléfono no es válido');
+    } else {
+      telefonoInput2.setCustomValidity('');
+    }
+  }
+
+  formulario2.addEventListener('submit', function(event) {
+    if (!formulario2.checkValidity()) {
+      event.preventDefault();
+    }
+  });
+ 
 </script>

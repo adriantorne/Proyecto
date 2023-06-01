@@ -36,8 +36,9 @@ class UsuarioModelo
 
     public function addUsuario($datos)
     {
-        $this->db->query("INSERT INTO usuario (nombreUser, claveUser, nombre, apellido, idDpto, email, telefono,rol) 
-            VALUES (:nombreUser,sha2(:claveUser,256),:nombre,:apellido,:Dpto,:email,:rol)");
+     
+        $this->db->query("INSERT INTO usuario (nombreUser, claveUser, nombre, apellido, idDpto, email, telefono,rol,estado) 
+            VALUES (:nombreUser,sha2(:claveUser,256),:nombre,:apellido,:Dpto,:email,:telefono,:rol,1)");
 
         //vinculamos los valores
         $this->db->bind(':nombreUser', trim($datos['nombreUser']));

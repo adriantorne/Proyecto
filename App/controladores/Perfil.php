@@ -26,17 +26,20 @@ class Perfil extends Controlador
             redireccionar("/inicio");
         }
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            print_r($datos = $_POST);
+             $datos = $_POST;
             $this->datos["usuario"] = $this->perfilModelo->getUsuario($idUser);
-            if ($datos['idUser'] != "" && $datos['claveNueva' == ""]) {
+            if ($datos['idUser'] != "" && $datos['claveNueva'] == "") {
                 if ($this->usuarioModelo->editUsuario($datos)) {
+                    
+                    redireccionar("/perfil/index/$idUser/cambio");
 
-                    redireccionar("/perfil/index/$idUser/error_1");
                 }
             } elseif ($datos['claveNueva'] != "") {
                 if ($this->usuarioModelo->getClave($datos)) {
                     if ($this->usuarioModelo->cambiarClave($datos)) {
                         redireccionar("/perfil/index/$idUser");
+                    }else{
+                       
                     }
                 }
             }

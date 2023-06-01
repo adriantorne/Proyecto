@@ -8,11 +8,16 @@
     </nav>
     <h2 class="text-center"><strong>Mi perfil <i class="bi bi-person"></i></strong> </h2>
     <div class="shadow row bg-white">
-        <form id="formPubli" method="post" enctype="multipart/form-data">
+        <form id="formPerfil" method="post" enctype="multipart/form-data">
 
-            <?php if (isset($datos["error"]) && $datos["error"] == 'error_1') : ?>
+            <?php if (isset($datos["error"]) && $datos["error"] == 'cambio') : ?>
                 <div class="alert alert-success mt-3 justify-content-center" role="alert">
                     Modificacion correcta
+                </div>
+            <?php endif ?>
+            <?php if (isset($datos["error"]) && $datos["error"] == 'cambioClave') : ?>
+                <div class="alert alert-success mt-3 justify-content-center" role="alert">
+                    Clave cambiada correctamente
                 </div>
             <?php endif ?>
 
@@ -32,12 +37,12 @@
 
             <div class="row">
                 <div class="mb-3 col-6">
-                    <label for="email_us" class="form-label">Email <i class="bi bi-envelope"></i></label>
-                    <input type="email" class="form-control" id="email_us" name="email" value="<?php echo $datos['usuarios']->email ?>" required>
+                    <label for="email" class="form-label">Email <i class="bi bi-envelope"></i></label>
+                    <input type="email" class="form-control" id="email" name="email" value="<?php echo $datos['usuarios']->email ?>" onkeyup="validarEmail()" required>
                 </div>
                 <div class="mb-3 col-6">
                     <label for="telefono" class="form-label">Telefono<i class="bi bi-phone"></i></label>
-                    <input type="text" class="form-control" id="telefono" name="telefono" value="<?php echo $datos['usuarios']->telefono ?>" required>
+                    <input type="text" class="form-control" id="telefono" name="telefono" value="<?php echo $datos['usuarios']->telefono ?>" onkeyup="validarTelefono()" required>
                 </div>
             </div>
 
@@ -124,4 +129,36 @@
             tipo.type = "password";
         }
     }
+    var formulario = document.getElementById('formPefil');
+  var emailInput = document.getElementById('email');
+  var telefonoInput = document.getElementById('telefono');
+
+  function validarEmail() {
+    var email = emailInput.value;
+    var regex = /^\S+@\S+\.\S+$/;
+
+    if (!regex.test(email)) {
+      emailInput.setCustomValidity('El correo electrónico no es válido');
+    } else {
+      emailInput.setCustomValidity('');
+    }
+  }
+
+  function validarTelefono() {
+    var telefono = telefonoInput.value;
+    var regex = /^[0-9]{10}$/;
+
+    if (!regex.test(telefono)) {
+      telefonoInput.setCustomValidity('El número de teléfono no es válido');
+    } else {
+      telefonoInput.setCustomValidity('');
+    }
+  }
+
+  formulario.addEventListener('submit', function(event) {
+    if (!formulario.checkValidity()) {
+      event.preventDefault();
+    }
+  });
+ 
 </script>

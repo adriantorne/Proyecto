@@ -10,11 +10,18 @@
     <!-- ==================== FIN ROL =================== -->
 
     <!-- SUBMENU -->
+    <section class="cookies">
+      <h2 class="cookies__titulo">¿Aceptas nuestras Cookies?</h2> 
+      <p class="cookies__texto">Usamos cookies para mejorar tu experiencia en la web.</p>
+      <div class="cookies__botones">
+          <button class="cookies__boton boton_no">No</button>
+          <button class="cookies__boton boton_si">Si</button>
+      </div>
+    </section>
     <div class="row">
 
 
-
-
+  
 
         <div class="col-sm-12 col-md-6 col-lg-4 capa mb-3"> <!-- Alineación adaptable de Bootstrap -->
             <div class="submenu">
@@ -154,6 +161,7 @@
 </section>
 
 
+
 <div class="modal fade modalForm" id="publicacion" tabindex="-1" aria-labelledby="modalPublicación" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
@@ -202,7 +210,7 @@
                         <div id="grupo__fechaInicio" class="col">
                             <label for="fechaInicio" class="form-label m-0">Fecha inicio</label>
                             <div class="grupo-input" id="input_fechaInicio">
-                                <input id="dateA" type="date" onchange="selectDate();" class="form-control" name="fechaInicio" min="">
+                                <input id="fechaInicio" type="date" class="form-control" name="fechaInicio" min="" required>
                                 <i class="validacion-estado fas fa-times-circle" style="right: 35px;"></i>
                             </div>
 
@@ -211,7 +219,7 @@
                         <div id="grupo__fechaFin" class="col">
                             <label for="fechaFin" class="form-label m-0">Fecha fin</label>
                             <div class="grupo-input" id="input__fechaFin">
-                                <input id="dateB" type="date" onchange="selectDate();" class="form-control" name="fechaFin" min="">
+                                <input id="fechaFin" type="date"  class="form-control" name="fechaFin" min="" required>
                                 <i class="validacion-estado fas fa-times-circle" style="right: 35px;"></i>
                             </div>
 
@@ -328,4 +336,87 @@
             }
         }
     }
+    var formulario = document.getElementById('formPubli');
+
+    formulario.addEventListener('submit', function(event) {
+    var opciones = document.querySelectorAll('input[type="checkbox"]:checked');
+
+    if (opciones.length === 0) {
+        alert('Debes seleccionar al menos una Pantalla');
+        event.preventDefault(); // Evita que el formulario se envíe
+    }
+    });
+    var formulario = document.getElementById('formPubli');
+    var fechaInicio = document.getElementById('fechaInicio');
+    var fechaFin = document.getElementById('fechaFin');
+
+    formulario.addEventListener('submit', function(event) {
+        if (fechaInicio.value >= fechaFin.value) {
+        alert('La fecha de inicio debe ser anterior a la fecha de fin.');
+        event.preventDefault();
+        }
+    });
+    let cookies = () => {
+   
+
+   const seccionCookie = document.querySelector('section.cookies');
+   const cookieSi = document.querySelector('.boton_si');
+   const cookieNo = document.querySelector('.boton_no');
+
+
+
+   function ocultarCookie() {
+       // Borra la sección de cookies en el HTML
+       seccionCookie.remove();
+   }
+
+   
+   function aceptarCookies() {
+       // Oculta el HTML de cookies
+       ocultarCookie();
+       // Guarda que ha aceptado
+       localStorage.setItem('cookie', true);
+       // Tu codigo a ejecutar si aceptan las cookies
+       ejecutarSiAcepta();
+   }
+
+   
+   function denegarCookies() {
+       // Oculta el HTML de cookies
+       ocultarCookie();
+       // Guarda que ha aceptado
+       localStorage.setItem('cookie', false);
+   }
+
+   function ejecutarSiAcepta() {
+     const datos=<?php echo json_encode($datos['usuarioSesion'])?>;
+     let expires = "expires=" + 0;
+     document.cookie = "username="+datos.Username+"; path=/;" +expires;
+     document.cookie = "clave="+datos.Clave +"; path=/;" +expires;
+   }
+
+   
+   function iniciar() {
+       // Comprueba si en el pasado el usuario ha marcado una opción
+       if (localStorage.getItem('cookie') !== null) {
+           if(localStorage.getItem('cookie') === 'true') {
+               // Aceptó
+               aceptarCookies();
+           } else {
+               // No aceptó
+               denegarCookies();
+           }
+       }
+   }
+
+   cookieSi.addEventListener('click',aceptarCookies, false);
+   cookieNo.addEventListener('click',denegarCookies, false);
+
+   return {
+       iniciar: iniciar
+       //console.log(iniciar);
+   }
+}
+
+cookies().iniciar();
 </script>

@@ -5,7 +5,7 @@ class Pantalla extends Controlador
     {
 
         Sesion::iniciarSesion($this->datos);
-
+        $this->publicacionModelo = $this->modelo('PublicacionModelo');
         $this->pantallaModelo = $this->modelo('PantallaModelo');
         $this->ubicacionModelo = $this->modelo('UbicacionModelo');
         $this->datos["rolesPermitidos"] = [3];
@@ -44,15 +44,19 @@ class Pantalla extends Controlador
         }
     }
 
-    public function ver_pantalla()
+    public function ver_pantalla($idPantalla)
     {
-
+        
         $this->datos["rolesPermitidos"] = [3];
 
         if (!tienePrivilegios($this->datos['usuarioSesion']->rol, $this->datos['rolesPermitidos'])) {
             echo "No tienes privilegios!!!";
             exit();
         }
+        $date = date('Y-m-d');
+        $this->datos["pantalla"] = $this->pantallaModelo->getPantalla($idPantalla);
+        $this->datos['publicacion'] = $this->publicacionModelo->getPublicacionPorPantalla($idPantalla, $date);
+        $this->vista("pantallas/verPantalla", $this->datos);
     }
     public function borrar_pantalla($idPantalla)
     {

@@ -119,7 +119,7 @@
               <?php endif ?>
               <td>
                 <a class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#ver<?php echo $publicacion->idPublic ?>"><i class="bi bi-eye"></i></a>
-                <a class="btn btn-outline-danger btn-sm" onclick="confirmar(event)" href="<?php echo RUTA_URL ?>/publicacion/borrar_publicacion/<?php echo $publicacion->idPublic ?>"><i class="bi-trash"></i></a>
+                <a class="btn btn-outline-danger btn-sm"  onclick="confirmar(event)" href="<?php echo RUTA_URL ?>/publicacion/borrar_publicacion/<?php echo $publicacion->idPublic ?>"><i class="bi-trash"></i></a>
               </td>
 
             </tr>
@@ -673,5 +673,31 @@
         }
       }
     }
+//     $('#btnEliminarRemesa').on('click', function() {
+  
+//   let settings_ajax = $.extend(true, {}, form.settings.ajax);
+//   settings_ajax.method = 'POST';
+//   settings_ajax.url = Common.settings.baseUrl + 'facturacion/remesa_bancaria/eliminar_remesa_bancaria';
+//   settings_ajax.data = encodeURIComponent(form.settings.csrf.name) + '=' + encodeURIComponent(form.settings.csrf.hash) + '&input_idRemesa='+ "input_idRemesa";
+
+//   settings_ajax.success = function(responseData) {
+//     form.settings.responseData = responseData;
+//     form.settings.csrf.name = responseData.csrf.name;
+//     form.settings.csrf.hash = responseData.csrf.hash;
+//     form.rebuildCsrfHash();
+    
+//     if(responseData.estado === 'true') {
+//         $('#remesas_bancarias_table').DataTable().ajax.reload()
+//         $('#modal_eliminar_remesa_bancaria').modal('hide')
+//         toastr.clear();
+//         toastr.success('Remesa eliminada correctamente.');
+//     }
+//     else {
+//         toastr.clear();
+//         toastr.error(responseData.mensaje);
+//     }
+//   };
+//   $.ajax(settings_ajax);
+// });
   </script>
   <!-- Modal -->

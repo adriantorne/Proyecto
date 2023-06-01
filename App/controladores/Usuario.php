@@ -26,6 +26,7 @@ class Usuario extends Controlador
         }
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $datos = $_POST;
+            
             if ($datos['idUser'] == "" && $datos['claveNueva'] == "") {
                 if ($this->usuarioModelo->addUsuario($datos)) {
                     redireccionar("/usuario");

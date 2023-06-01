@@ -13,7 +13,7 @@
       <div class="mb-2 d-grid gap-2 d-md-flex justify-content-md-end col-8">
 
 
-        <select name="tipomov" id="tipomov" class="form-select">
+        <select name="tipomov" id="tipomov" class="form-select" onchange="filtrarPublicaciones()">
           <option value="" selected disabled>Seleccione un estado de publicacion...</option>
           <option value="1">Todos</option>
           <option value="2">Aceptadas</option>
@@ -37,6 +37,7 @@
       </div>
 
     </div>
+    <?php if (count($datos["mispublicaciones"]) > 5) : ?>
     <table class="table table-hover shadow">
       <thead>
         <tr style="background-color:#043b83;" class="text-light">
@@ -83,7 +84,53 @@
       <span id="page"></span>
 
     </div>
+    <?php else : ?>
+      <table class="table table-hover shadow">
+        <thead>
+          <tr style="background-color:#043b83;" class="text-light">
 
+            <th scope="col">Titulo</th>
+            <th scope="col">Fecha Creación</th>
+            <th scope="col">Fecha Inicio</th>
+            <th scope="col">Fecha Fin</th>
+
+            
+            <th scope="col">Estado</th>
+            <th></th>
+
+
+          </tr>
+        </thead>
+        <tbody id="usuarios2">
+          <?php foreach ($datos["mispublicaciones"] as $publicacion) : ?>
+            <tr data-validada="<?php echo $publicacion->validada; ?>">
+
+              <td><?php echo $publicacion->tituloPublic ?></td>
+              <td><?php echo $publicacion->fechaCreacion ?></td>
+              <td><?php echo $publicacion->fechaInicio ?></td>
+              <td><?php echo $publicacion->fechaLimite ?></td>
+            
+              <?php if ($publicacion->validada == "1") : ?>
+                <td style="color:green;"><strong>APROBADA</strong></td>
+              <?php elseif ($publicacion->validada == "-1") : ?>
+                <td style="color:red;"><strong>DENEGADA</strong></td>
+              <?php elseif($publicacion->validada == "0"): ?>
+                <td style="color:grey;"><strong>PENDIENTE</strong></td>
+              <?php endif?>
+              <?php 
+                  $estado="";
+                if ($publicacion->validada == "1"||$publicacion->validada=="0"){
+                $estado="style='visibility:hidden;'";
+              } ?>
+              <td>
+                <a class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#ver<?php echo $publicacion->idPublic ?>"><i class="bi bi-eye"></i></a>
+                <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" title="rehacer publicacion" data-bs-target="#rehacer<?php echo $publicacion->idPublic?>" <?php echo $estado?>><i class="bi bi-arrow-clockwise" ></i></button> </td>
+
+            </tr>
+          <?php endforeach ?>
+      </table>
+
+    <?php endif ?>
 
 
   <?php else : ?>
@@ -169,7 +216,7 @@
               Motivo de denegación: <strong><?php echo $pendientes->motivoDenegacion ?></strong>
             </div>
             <div class="grupo" id="grupo__asunto">
-              <form method="POST">
+              <form method="POST" id="formPubli">
                 <label for="asunto" name="asunto" class="form-label mt-2">Titulo</label>
                 <div class="grupo-input" id="input__asunto">
                   <input type="text" class="form-control" id="asunto" name="titulo" required value="<?php echo $pendientes->tituloPublic ?>">
@@ -186,7 +233,7 @@
               <div id="grupo__fechaInicio" class="col">
                 <label for="fechaInicio" class="form-label m-0">Fecha inicio</label>
                 <div class="grupo-input" id="input_fechaInicio">
-                  <input id="dateA" type="date" onchange="selectDate();" class="form-control" name="fechaInicio" min="" value="<?php echo $pendientes->fechaInicio ?>">
+                  <input id="dateA" type="date" class="form-control" name="fechaInicio" id="fechaIni" min="" value="<?php echo $pendientes->fechaInicio ?>">
                   <i class="validacion-estado fas fa-times-circle" style="right: 35px;"></i>
                 </div>
 
@@ -195,7 +242,7 @@
               <div id="grupo__fechaFin" class="col">
                 <label for="fechaFin" class="form-label m-0">Fecha fin</label>
                 <div class="grupo-input" id="input__fechaFin">
-                  <input id="dateB" type="date" onchange="selectDate();" class="form-control" name="fechaFin" min="" value="<?php echo $pendientes->fechaLimite ?>">
+                  <input id="dateB" type="date" class="form-control" name="fechaFin" id="fechaFin" min="" value="<?php echo $pendientes->fechaLimite ?>">
                   <i class="validacion-estado fas fa-times-circle" style="right: 35px;"></i>
                 </div>
 
@@ -235,7 +282,7 @@
   //console.log(ordenT);
   document.getElementById("page").style = "display:none";
   var current_page = 1;
-  var obj_per_page = 6;
+  var obj_per_page = 5;
 
   function totNumPages() {
 
@@ -807,4 +854,35 @@
     }
 
   });
+
+  function filtrarPublicaciones() {
+  var filtro = document.getElementById("tipomov").value;
+  var filas = document.querySelectorAll("#usuarios2 tr");
+
+  for (var i = 0; i < filas.length; i++) {
+    var validada = filas[i].getAttribute("data-validada");
+
+    if (filtro === "" || filtro === "1") {
+      filas[i].style.display = ""; // Muestra todas las filas
+    } else if (filtro === "2" && validada === "1") {
+      filas[i].style.display = ""; // Muestra las filas de publicaciones aceptadas
+    } else if (filtro === "3" && validada === "-1") {
+      filas[i].style.display = ""; // Muestra las filas de publicaciones denegadas
+    } else if (filtro === "4" && validada === "0") {
+      filas[i].style.display = ""; // Muestra las filas de publicaciones con validada igual a 0
+    } else {
+      filas[i].style.display = "none"; // Oculta las demás filas
+    }
+  }
+}
+    var formulario = document.getElementById('formPubli');
+    var fechaInicio = document.getElementById('fechaIni');
+    var fechaFin = document.getElementById('fechaFin');
+
+    formulario.addEventListener('submit', function(event) {
+        if (fechaInicio.value >= fechaFin.value) {
+        alert('La fecha de inicio debe ser anterior a la fecha de fin.');
+        event.preventDefault();
+        }
+    });
 </script>

@@ -59,7 +59,16 @@ class PublicacionModelo
         $this->db->bind(':fechahoy', $date);
         return $this->db->registros();
     }
+    public function getPublicacionPorPantalla($idPantalla, $date)
+    {
+        $this->db->query("SELECT publicacion.idPublic, pantalla.nombrePantalla, publicacion.tituloPublic,publicacion.mensajePublic,publicacion.archivo FROM publicacion 
+        left JOIN asignar ON asignar.idPublic=publicacion.idPublic
+        left JOIN pantalla ON pantalla.idPantalla= asignar.idPantalla where pantalla.idPantalla=:idPantalla and publicacion.fechaInicio<=:fechahoy and publicacion.fechaLimite>=:fechahoy and validada='1'");
 
+        $this->db->bind(':idPantalla', $idPantalla);
+        $this->db->bind(':fechahoy', $date);
+        return $this->db->registros();
+    }
 
     public function getCantPubl()
     {

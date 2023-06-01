@@ -18,6 +18,15 @@ class PantallaModelo
 
         return $this->db->registros();
     }
+    public function getPantalla($idPantalla)
+    {
+        //juntar con alumno y personas para mostrar el nombre de persona
+        $this->db->query("SELECT pantalla.*, ubicacion.nombreUbc 
+                FROM pantalla, ubicacion 
+                WHERE pantalla.idUbc = ubicacion.idUbc and pantalla.idPantalla=:idPantalla");
+                $this->db->bind(':idPantalla', $idPantalla);
+        return $this->db->registro();
+    }
 
 
 

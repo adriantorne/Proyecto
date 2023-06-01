@@ -53,7 +53,7 @@
                     <td class="w-25">
                         <a data-bs-toggle="modal" data-bs-target="#ver<?php echo $pantalla->idPantalla; ?>" class="w-sm-100 btn btn-outline-success btn-lg"><i class="bi bi-pencil-square"></i></a>
                         <a class="w-sm-100  btn btn-outline-danger btn-lg" onclick="confirmar(event)" href="<?php echo RUTA_URL ?>/pantalla/borrar_pantalla/<?php echo $pantalla->idPantalla ?>"><i class="bi-trash"></i></a>
-
+                        <a class="w-sm-100  btn btn-outline-primary btn-lg"href="<?php echo RUTA_URL?>/pantalla/ver_pantalla/<?php echo $pantalla->idPantalla?>"><i class="bi bi-eye"></i></a>
                     </td>
                 <?php endforeach ?>
                 </tr>
@@ -151,9 +151,10 @@
 
                     <label for="mensaje" class="form-label">Mac</label>
                     <input type="text" class="form-control" id="mac" name="mac" onkeyup="validarMac(this)" required>
-                    <select name="ubicacion" id="tipomov" class="form-select mt-3 mb-3">
+                    <label for="asunto" name="asunto" class="form-label mt-2">Seleccione ubicación</label>
+                    <select name="ubicacion" id="tipomov" class="form-select mb-3" required>
 
-                        <option value="" selected disabled>Seleccione la ubicación</option>
+                       
                         <?php foreach ($datos['ubicaciones'] as $ubicacion) : ?>
                             <option value="<?php echo $ubicacion->idUbc ?>"><?php echo $ubicacion->nombreUbc ?></option>
                         <?php endforeach ?>
@@ -207,7 +208,7 @@
     }
 
     function validarMac(mac) {
-        var regexp = /^(([A-Fa-f0-9]{2}[:]){5}[A-Fa-f0-9]{2}[,]?)+$/i;
+        var regexp = /^(([A-Fa-f0-9]{2}[-:]){5}[A-Fa-f0-9]{2}[,]?)+$/i;
         var mac_address = mac.value;
         console.log(mac_address);
         if (regexp.test(mac_address)) {
