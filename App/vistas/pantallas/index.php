@@ -1,4 +1,6 @@
 <?php require_once RUTA_APP . '/vistas/inc/header.php'; ?>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/css/bootstrap-notify.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/js/bootstrap-notify.min.js"></script>
 
 <div class="container mt-2">
     <nav aria-label="breadcrumb">
@@ -43,7 +45,7 @@
         </thead>
         <tbody id="usuarios">
             <?php foreach ($datos['pantallas'] as $pantalla) : ?>
-                <tr>
+                <tr id="fila-<?php echo $pantalla->idPantalla?>">
 
                     <td><?php echo $pantalla->nombrePantalla ?></td>
                     <td><?php echo $pantalla->MAC ?></td>
@@ -52,8 +54,9 @@
 
                     <td class="w-25">
                         <a data-bs-toggle="modal" data-bs-target="#ver<?php echo $pantalla->idPantalla; ?>" class="w-sm-100 btn btn-outline-success btn-lg"><i class="bi bi-pencil-square"></i></a>
-                        <a class="w-sm-100  btn btn-outline-danger btn-lg" onclick="confirmar(event)" href="<?php echo RUTA_URL ?>/pantalla/borrar_pantalla/<?php echo $pantalla->idPantalla ?>"><i class="bi-trash"></i></a>
-                        <a class="w-sm-100  btn btn-outline-primary btn-lg"href="<?php echo RUTA_URL?>/pantalla/ver_pantalla/<?php echo $pantalla->idPantalla?>"><i class="bi bi-eye"></i></a>
+                        <a class="w-sm-100 btn btn-outline-danger btn-lg" onclick="confirmarEliminar(event, <?php echo $pantalla->idPantalla ?>)"><i class="bi-trash"></i></a>
+
+<a class="w-sm-100  btn btn-outline-primary btn-lg"href="<?php echo RUTA_URL?>/pantalla/ver_pantalla/<?php echo $pantalla->idPantalla?>"><i class="bi bi-eye"></i></a>
                     </td>
                 <?php endforeach ?>
                 </tr>
@@ -177,12 +180,53 @@
 </div>
 
 <script>
-    function confirmar(e) {
-        var res = confirm('¿Estas seguro de que quieres borrar esta pantalla?');
-        if (res == false) {
-            e.preventDefault();
-        }
+
+  // Función para manejar el evento de clic en el botón de eliminar
+  function confirmarEliminar(event, idPantalla) {
+    event.preventDefault();
+
+    if (confirm("¿Estás seguro de que deseas eliminar esta pantalla?")) {
+      eliminarPantalla(idPantalla);
     }
+  }
+
+  function eliminarPantalla(idPantalla) {
+    fetch('<?php echo RUTA_URL ?>/pantalla/borrar_pantalla/' + idPantalla, {
+      method: 'DELETE',
+    })
+      .then(response => {
+        if (response.ok) {
+          console.log('Pantalla eliminada correctamente');
+          // Realiza cualquier acción adicional después de la eliminación exitosa
+
+          // Elimina la fila correspondiente en la tabla
+          const fila = document.getElementById('fila-' + idPantalla);
+          if (fila) {
+            fila.remove();
+          }
+
+          // Muestra el toast de eliminación exitosa
+          Swal.fire({
+            icon: 'success',
+            title: 'Pantalla eliminada correctamente',
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+          });
+        } else {
+          console.log('Error al eliminar la pantalla');
+          // Realiza cualquier acción adicional para manejar el error de eliminación
+        }
+      })
+      .catch(error => {
+        console.log('Error de red al eliminar la pantalla', error);
+        // Realiza cualquier acción adicional para manejar el error de red
+      });
+  }
+
+
+
 
     function search() {
         var num_cols, display, input, filter, table_body, tr, td, i, txtValue;

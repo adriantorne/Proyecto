@@ -10,7 +10,7 @@ error_reporting(E_ALL);
 define('RUTA_APP', dirname(dirname(__FILE__)));
 
 //Ruta url, Ejemplo: http://localhost/atletismo
-define('RUTA_URL', 'http://localhost/Proyecto');
+define('RUTA_URL', 'https://localhost/Proyecto');
 
 define('NOMBRE_SITIO', 'Sarabastall1');
 
@@ -20,9 +20,9 @@ define('DB_HOST', '127.0.0.1');
 define('DB_USUARIO', 'root');
 define('DB_PASSWORD', '');
 define('DB_NOMBRE','proyecto');
-define('EmailEmisor','atornehijar@gmail.com');
-define('EmailPass','a003casacasa');
+define('EmailEmisor','adrian.torne@memorandum.net');
+define('EmailPass','%218xlMb');
 define('Emisor','Adrian Torne');
-define('Host','smtp.ionos.es');
+define('Host','mail.memorandum.net');
 define('SMTPSecure','TLS');
 define('Puerto',587);

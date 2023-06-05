@@ -163,6 +163,7 @@ class Publicacion extends Controlador
             echo "se ha producido un error!!!!";
         }
     }
+    
     public function desactivar_publicacion($idPublic)
     {
         $this->datos["rolesPermitidos"] = [3];
