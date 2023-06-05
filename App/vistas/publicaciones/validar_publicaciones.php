@@ -41,7 +41,7 @@
             </thead>
             <tbody id="usuarios">
                 <?php foreach ($datos['pendientes'] as $pendientes) : ?>
-                    <tr>
+                    <tr id="fila-<?php echo $pendientes->idPublic?>">
 
                         <td style="max-width:300px; overflow:hidden;"><?php echo $pendientes->tituloPublic ?></td>
 
@@ -58,7 +58,7 @@
                         </td>
                         <td>
                             <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#ver<?php echo $pendientes->idPublic ?>"><i class="bi bi-eye"></i></button>
-                            <a class="btn btn-outline-success" onclick="confirmar(event)" href="<?php echo RUTA_URL ?>/publicacion/validar_publicacion/<?php echo $pendientes->idPublic ?>"><i class="bi bi-check-circle-fill"></i></i></a>
+                            <a class="btn btn-outline-success" onclick="confirmar(event)" href="#" data-id="<?php echo $pendientes->idPublic ?>"><i class="bi bi-check-circle-fill"></i></a>
                             <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#denegar<?php echo $pendientes->idPublic ?>"><i class="bi bi-x-circle-fill"></i></button>
                         </td>
 
@@ -174,12 +174,56 @@
 
 
 <script>
-    function confirmar(e) {
-        var res = confirm('¿Estas seguro de que quieres aprobar esta publicación?');
-        if (res == false) {
-            e.preventDefault();
+function confirmar(event) {
+  event.preventDefault(); // Evita que el enlace siga la URL directamente
+
+  var enlace = event.target; // Obtén el elemento de enlace que se hizo clic
+  var idPublic = enlace.getAttribute('data-id'); // Obtiene el ID de la publicación desde el atributo de datos
+
+  // Verifica si ya se ha confirmado la acción
+  var confirmado = enlace.getAttribute('data-confirmado');
+  if (confirmado === 'true') {
+    return; // Si ya se confirmó, no realiza ninguna acción adicional
+  }
+
+  // Muestra una ventana emergente de confirmación
+  var confirmacion = confirm('¿Estás seguro de que deseas validar esta publicación?');
+
+  if (confirmacion) {
+    // Marca el enlace como confirmado para evitar clics repetidos
+    enlace.setAttribute('data-confirmado', 'true');
+
+    fetch('<?php echo RUTA_URL ?>/publicacion/validar_publicacion/' + idPublic, {
+      method: 'POST' // O el método HTTP adecuado para tu caso
+    })
+    .then(response => {
+      if (response.ok) {
+        const fila = document.getElementById('fila-' + idPublic);
+        if (fila) {
+          fila.remove();
         }
-    }
+
+        // Muestra el toast de eliminación exitosa
+        Swal.fire({
+          icon: 'success',
+          title: 'Publicacion validada correctamente',
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000
+        });
+      } else {
+        // La solicitud no fue exitosa
+        // Maneja el error de acuerdo a tus necesidades
+      }
+    })
+    .catch(error => {
+      // Maneja los errores de la solicitud fetch
+      console.error('Error en la solicitud fetch:', error);
+    });
+  }
+}
+
 
     function search() {
         var num_cols, display, input, filter, table_body, tr, td, i, txtValue;
