@@ -83,4 +83,16 @@ class Pantalla extends Controlador
         print_r($datos);
         exit();
     }
+    public function insertar_pantalla(){
+        $this->datos["rolesPermitidos"] = [3];
+
+        if (!tienePrivilegios($this->datos['usuarioSesion']->rol, $this->datos['rolesPermitidos'])) {
+            redireccionar("/inicio");
+        }
+        if ($this->pantallaModelo->addPantalla($datos)) {
+            redireccionar("/pantalla");
+        } else {
+            echo "se ha producido un error!!!!";
+        }
+    }
 }
